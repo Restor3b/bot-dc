@@ -1,0 +1,21 @@
+{
+  "name": "dc-bot",
+  "version": "3.0.0",
+  "description": " ",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "TFAGaming",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "discord.js": "^14.16.3",
+    "discordjs-v14-bot-template": "file:",
+    "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.0",
+    "quick-yaml.db": "^1.2.2"
+  }
+}
