@@ -140,14 +140,14 @@ module.exports = new ApplicationCommand({
                 .setTitle(`Zmiana stopnia funckjonariusza`)
                 .setDescription(`Kto dokonał zmiany: <@${author.id}>`)
                 .addFields(
-                    { name: '**--------------------------------------------------------------------------**', value: ' '},
+                    { name: '**------------------------------------------------------------------**', value: ' '},
                     { name: 'Funkcjonariusz: ', value: `<@${target.id}>`, inline: true},
                     { name: 'Nowy stopień: ', value: `${newRank.name}`, inline: true },
                     { name: 'Powód: ', value: `${reason}`, inline: true },
                     { name: 'Nr odznaki przed: ', value: `${badgeNumberBefore}`, inline: true },
                     { name: 'Nr odznaki po: ', value: `${badgeNumberAfter}`, inline: true },
                     { name: ' ', value: ' ', inline: true },
-                    { name: '**--------------------------------------------------------------------------**', value: ' ', inline: true }
+                    { name: '**------------------------------------------------------------------**', value: ' ', inline: true }
                 )
                 .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
                 .setColor(0x2f3136)
