@@ -151,7 +151,7 @@ module.exports = new ApplicationCommand({
                 )
                 .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
                 .setColor(0x2f3136)
-                .setThumbnail('');
+                .setThumbnail('https://imgur.com/sXiVVbj');
 
             const channelId = '1294040234853404765';
             const channel = client.channels.cache.get(channelId);
