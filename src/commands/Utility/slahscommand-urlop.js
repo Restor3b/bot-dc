@@ -141,7 +141,7 @@ module.exports = new ApplicationCommand({
             }
         }
 
-        // Automatically remove the vacation role after the specified date
+        
         if (action === 'add') {
             const untilDateTime = new Date(untilDate);
             const currentTime = new Date();
