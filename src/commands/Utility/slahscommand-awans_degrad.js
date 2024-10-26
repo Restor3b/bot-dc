@@ -5,19 +5,19 @@ const ApplicationCommand = require("../../structure/ApplicationCommand");
 module.exports = new ApplicationCommand({
     command: {
         name: 'stopien',
-        description: 'Awansuj lub zdegraduj użytkownika',
+        description: 'Awansuj lub zdegraduj funkcjonariusza',
         type: 1,
         options: [
             {
                 name: 'osoba',
-                description: 'Użytkownik, którego stopień zmieniasz',
-                type: 6, // USER type
+                description: 'Funkcjonariusz, którego stopień zmieniasz',
+                type: 6,
                 required: true
             },
             {
                 name: 'akcja',
                 description: 'Wybierz akcję: awans lub degradacja',
-                type: 3, // STRING type
+                type: 3, 
                 required: true,
                 choices: [
                     {
@@ -33,19 +33,19 @@ module.exports = new ApplicationCommand({
             {
                 name: 'powod',
                 description: 'Powód zmiany stopnia',
-                type: 3, // STRING type
+                type: 3, 
                 required: true
             },
             {
                 name: 'nr_odznaki_przed',
                 description: 'Numer odznaki przed zmianą',
-                type: 3, // STRING type
+                type: 3, 
                 required: true
             },
             {
                 name: 'nr_odznaki_po',
                 description: 'Numer odznaki po zmianie',
-                type: 3, // STRING type
+                type: 3, 
                 required: true
             }
         ]

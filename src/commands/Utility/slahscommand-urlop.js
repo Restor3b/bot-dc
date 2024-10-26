@@ -5,7 +5,7 @@ const ApplicationCommand = require("../../structure/ApplicationCommand");
 module.exports = new ApplicationCommand({
     command: {
         name: 'urlop',
-        description: 'Dodaj rangę urlop użytkownikowi',
+        description: 'Dodaj rangę urlop funkcjonraiuszowi',
         type: 1,
         options: [
             {
