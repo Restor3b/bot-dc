@@ -5,7 +5,7 @@ const ApplicationCommand = require("../../structure/ApplicationCommand");
 module.exports = new ApplicationCommand({
     command: {
         name: 'hansley',
-        description: 'stopien',
+        description: 'gif',
         type: 1,
         options: []
     },
