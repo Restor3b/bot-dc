@@ -5,12 +5,12 @@ const ApplicationCommand = require("../../structure/ApplicationCommand");
 module.exports = new ApplicationCommand({
     command: {
         name: 'zwolnij',
-        description: 'Zwolnij użytkownika z wydziału',
+        description: 'Zwolnij funkcjonariusza z wydziału',
         type: 1, 
         options: [
             {
                 name: 'osoba',
-                description: 'Użytkownik, który ma zostać zwolniony',
+                description: 'Funkcjonariusz, który ma zostać zwolniony',
                 type: 6, 
                 required: true
             },
@@ -78,7 +78,7 @@ module.exports = new ApplicationCommand({
 
         if (!rank) {
             await interaction.reply({
-                content: 'Nie udało się ustalić stopnia użytkownika.',
+                content: 'Nie udało się ustalić stopnia funkcjonariusza.',
                 ephemeral: true
             });
             return;
@@ -97,7 +97,7 @@ module.exports = new ApplicationCommand({
             )
             .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
             .setColor(0x2f3136)
-            .setThumbnail('https://cdn.discordapp.com/attachments/1293986296418668599/1294647977142521917/f85cc66dd65a679d957ca4d6c668d070.png?ex=670d17e3&is=670bc663&hm=cc500303fb01ac544a5036008de0cb145c3805001c28bbf077fcb3a71ac90280&');
+            .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=671d6a8b&is=671c190b&hm=6313f2ba968894d2e2382d3878ee0103179b9fc7209d30ff68451397c33cfdf1&=&format=webp&quality=lossless');
         
         try {
             const channelId = '1294040234853404765'; 
@@ -117,7 +117,7 @@ module.exports = new ApplicationCommand({
             await targetMember.roles.set([]);
         } catch (err) {
             await interaction.followUp({
-                content: 'Nie udało się usunąć ról od użytkownika.',
+                content: 'Nie udało się usunąć ról od funkcjonariusza.',
                 ephemeral: true
             });
         }
