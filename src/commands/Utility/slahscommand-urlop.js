@@ -92,13 +92,13 @@ module.exports = new ApplicationCommand({
                 const embed = new EmbedBuilder()
                     .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
                     .setTitle(`Ktoś poszedł na urlop`)
-                    .setDescription(`Kto: <@${author.id}>
-                    Powód (OOC): ${reasonOOC}
-                    Powód (IC): ${reasonIC}
-                    Data zakończenia: ${untilDate}`)
+                    .setDescription(`Kto: <@${author.id}>`)
                     .addFields(
                         { name: '**------------------------------------------------------------------**', value: ' '},
-                        { name: ': ', value: `<@${target.id}>`, inline: true },
+                        { name: 'Powód (OOC): ', value: `${reasonOOC}`, inline: true },
+                        { name: 'Powód (IC): ', value: `${reasonIC}`, inline: true },
+                        { name: 'Data zakończenia: ', value: `${untilDate}`, inline: true },
+                        { name: ' ', value: `<@${target.id}>`, inline: true },
                         { name: 'Urlop został nadany', value: '✅', inline: true },
                         { name: '**------------------------------------------------------------------**', value: ' ' }
                     )
