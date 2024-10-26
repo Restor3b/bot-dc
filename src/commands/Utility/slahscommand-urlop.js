@@ -10,7 +10,7 @@ module.exports = new ApplicationCommand({
         options: [
             {
                 name: 'osoba',
-                description: 'Użytkownik, któremu dodajesz rangę urlop',
+                description: 'Funkcjonariusz, któremu dodajesz rangę urlop',
                 type: 6, // USER type
                 required: true
             },
@@ -99,7 +99,7 @@ module.exports = new ApplicationCommand({
                     .addFields(
                         { name: '**------------------------------------------------------------------**', value: ' '},
                         { name: ': ', value: `<@${target.id}>`, inline: true },
-                        { name: 'Urlop został nadany', value: '', inline: true },
+                        { name: 'Urlop został nadany', value: '✅', inline: true },
                         { name: '**------------------------------------------------------------------**', value: ' ' }
                     )
                     .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
@@ -122,7 +122,7 @@ module.exports = new ApplicationCommand({
                 }
             } catch (err) {
                 await interaction.followUp({
-                    content: 'Nie udało się dodać rangi urlop użytkownikowi.',
+                    content: 'Nie udało się dodać rangi urlop.',
                     ephemeral: true
                 });
             }
