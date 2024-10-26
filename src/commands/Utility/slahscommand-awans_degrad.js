@@ -86,20 +86,20 @@ module.exports = new ApplicationCommand({
         }
 
         const rankRoles = [
-            { id: '1297147165654777867', name: '👮 SASD | Captain' },
-            { id: '1297147062756049008', name: '👮 SASD | Staff Lieutenant' },
-            { id: '1292964686408454195', name: '👮 SASD | Lieutenant' },
-            { id: '1259796857312247912', name: '👮 SASD | Master Sergeant' },
-            { id: '1292965455966769276', name: '👮 SASD | Staff Sergeant' },
-            { id: '1259796857312247910', name: '👮 SASD | Sergeant' },
-            { id: '1274804209287561328', name: '👮 SASD | Corporal First Class' },
-            { id: '1259796857312247909', name: '👮 SASD | Corporal Second Class' },
-            { id: '1259796857303863314', name: '👮 SASD | Master Deputy' },
-            { id: '1259796857303863313', name: '👮 SASD | Senior Deputy' },
-            { id: '1259796857303863312', name: '👮 SASD | Deputy III' },
-            { id: '1259796857303863311', name: '👮 SASD | Deputy II' },
-            { id: '1259796857303863310', name: '👮 SASD | Deputy I' },
-            { id: '1259796857303863309', name: '👮 SASD | Probie Deputy' }
+            { id: '1297147165654777867', name: 'Captain' },
+            { id: '1297147062756049008', name: 'Staff Lieutenant' },
+            { id: '1292964686408454195', name: 'Lieutenant' },
+            { id: '1259796857312247912', name: 'Master Sergeant' },
+            { id: '1292965455966769276', name: 'Staff Sergeant' },
+            { id: '1259796857312247910', name: 'Sergeant' },
+            { id: '1274804209287561328', name: 'Corporal First Class' },
+            { id: '1259796857312247909', name: 'Corporal Second Class' },
+            { id: '1259796857303863314', name: 'Master Deputy' },
+            { id: '1259796857303863313', name: 'Senior Deputy' },
+            { id: '1259796857303863312', name: 'Deputy III' },
+            { id: '1259796857303863311', name: 'Deputy II' },
+            { id: '1259796857303863310', name: 'Deputy I' },
+            { id: '1259796857303863309', name: 'Probie Deputy' }
         ];
 
         let currentRankIndex = rankRoles.findIndex(role => targetMember.roles.cache.has(role.id));
@@ -135,11 +135,10 @@ module.exports = new ApplicationCommand({
         const newRank = rankRoles[newRankIndex];
         try {
             await targetMember.roles.add(newRank.id);
-            const rolesToRemove = rankRoles.filter(role => role.id !== newRank.id).map(role => role.id);
-            await targetMember.roles.remove(rolesToRemove).catch(console.error);
+            await targetMember.roles.remove(rankRoles.filter(role => role.id !== newRank.id).map(role => role.id));
             const embed = new EmbedBuilder()
                 .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
-                .setTitle(`Zmiana stopnia funckjonariusza`)
+                .setTitle(`Zmiana stopnia funkcjonariusza`)
                 .setDescription(`Kto dokonał zmiany: <@${author.id}>`)
                 .addFields(
                     { name: '**------------------------------------------------------------------**', value: ' '},
@@ -170,7 +169,8 @@ module.exports = new ApplicationCommand({
                 });
             }
         } catch (err) {
-            await interaction.followUp({
+            console.error(err);
+            await interaction.reply({
                 content: 'Nie udało się zmienić rangi użytkownika.',
                 ephemeral: true
             });
