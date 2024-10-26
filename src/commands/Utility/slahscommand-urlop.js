@@ -111,7 +111,7 @@ module.exports = new ApplicationCommand({
                 if (channel) {
                     await channel.send({ embeds: [embed] });
                     await interaction.reply({
-                        content: `Ranga urlop została dodana użytkownikowi <@${target.id}> do ${untilDate}.`,
+                        content: `Ranga urlop została dodana dla <@${target.id}> do ${untilDate}.`,
                         ephemeral: true
                     });
                 } else {
@@ -130,12 +130,12 @@ module.exports = new ApplicationCommand({
             try {
                 await targetMember.roles.remove(vacationRoleId);
                 await interaction.reply({
-                    content: `Ranga urlop została usunięta użytkownikowi <@${target.id}>.`,
+                    content: `Ranga urlop została usunięta dla <@${target.id}>.`,
                     ephemeral: true
                 });
             } catch (err) {
                 await interaction.followUp({
-                    content: 'Nie udało się usunąć rangi urlop użytkownikowi.',
+                    content: 'Nie udało się usunąć rangi urlop.',
                     ephemeral: true
                 });
             }
