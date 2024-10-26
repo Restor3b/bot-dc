@@ -41,6 +41,13 @@ module.exports = new ApplicationCommand({
             return;
         }
         const target = interaction.options.getUser('osoba');
+        if (target.id === interaction.user.id) {
+            await interaction.reply({
+                content: 'Nie możesz zwolnić samego siebie!',
+                ephemeral: true
+            });
+            return;
+        }
         const targetMember = interaction.guild.members.cache.get(target.id);
         const reason = interaction.options.getString('powod');
         const author = interaction.user;
