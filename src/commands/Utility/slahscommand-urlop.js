@@ -9,12 +9,6 @@ module.exports = new ApplicationCommand({
         type: 1,
         options: [
             {
-                name: 'osoba',
-                description: 'Funkcjonariusz, któremu dodajesz rangę urlop',
-                type: 6, 
-                required: true
-            },
-            {
                 name: 'powod_ooc',
                 description: 'Powód urlopu (OOC)',
                 type: 3, 
@@ -69,21 +63,12 @@ module.exports = new ApplicationCommand({
             return;
         }
 
-        const target = interaction.options.getUser('osoba');
-        const targetMember = interaction.guild.members.cache.get(target.id);
+        const targetMember = member;
         const action = interaction.options.getString('akcja');
         const reasonOOC = interaction.options.getString('powod_ooc');
         const reasonIC = interaction.options.getString('powod_ic');
         const untilDate = interaction.options.getString('do_kiedy');
         const author = interaction.user;
-
-        if (!targetMember) {
-            await interaction.reply({
-                content: 'Nieprawidłowa osoba!',
-                ephemeral: true
-            });
-            return;
-        }
 
         const vacationRoleId = '1279535711510466601';
         if (action === 'add') {
@@ -92,25 +77,24 @@ module.exports = new ApplicationCommand({
                 const embed = new EmbedBuilder()
                     .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
                     .setTitle(`Ktoś poszedł na urlop`)
-                    .setDescription(`Kto wystawił: <@${author.id}>`)
+                    .setDescription(`Kto: <@${author.id}>`)
                     .addFields(
                         { name: '**------------------------------------------------------------------**', value: ' '},
                         { name: 'Powód (OOC): ', value: `${reasonOOC}`, inline: true },
                         { name: 'Powód (IC): ', value: `${reasonIC}`, inline: true },
                         { name: 'Data zakończenia: ', value: `${untilDate}`, inline: true },
-                        { name: 'Dla kogo: ', value: `<@${target.id}>`, inline: true },
                         { name: '**------------------------------------------------------------------**', value: ' ' }
                     )
                     .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
                     .setColor(0x2f3136)
                     .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=671d6a8b&is=671c190b&hm=6313f2ba968894d2e2382d3878ee0103179b9fc7209d30ff68451397c33cfdf1&=&format=webp&quality=lossless');
 
-                const channelId = '1299672680391245846';
+                const channelId = '1259796858654429286';
                 const channel = client.channels.cache.get(channelId);
                 if (channel) {
                     await channel.send({ embeds: [embed] });
                     await interaction.reply({
-                        content: `Ranga urlop została dodana dla <@${target.id}> do ${untilDate}.`,
+                        content: `Ranga urlop została dodana dla <@${targetMember.id}> do ${untilDate}.`,
                         ephemeral: true
                     });
                 } else {
@@ -129,7 +113,7 @@ module.exports = new ApplicationCommand({
             try {
                 await targetMember.roles.remove(vacationRoleId);
                 await interaction.reply({
-                    content: `Ranga urlop została usunięta dla <@${target.id}>.`,
+                    content: `Ranga urlop została usunięta dla <@${targetMember.id}>.`,
                     ephemeral: true
                 });
             } catch (err) {
@@ -140,7 +124,6 @@ module.exports = new ApplicationCommand({
             }
         }
 
-        
         if (action === 'add') {
             const untilDateTime = new Date(untilDate);
             const currentTime = new Date();
@@ -152,7 +135,7 @@ module.exports = new ApplicationCommand({
                         await targetMember.roles.remove(vacationRoleId);
                         const autoRemoveEmbed = new EmbedBuilder()
                             .setTitle(`Automatyczne usunięcie rangi urlop`)
-                            .setDescription(`Ranga urlop została automatycznie usunięta użytkownikowi <@${target.id}> po upływie okresu urlopu.`)
+                            .setDescription(`Ranga urlop została automatycznie usunięta użytkownikowi <@${targetMember.id}> po upływie okresu urlopu.`)
                             .setColor(0x2f3136);
 
                         if (channel) {
