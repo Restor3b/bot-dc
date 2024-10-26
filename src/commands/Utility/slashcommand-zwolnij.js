@@ -60,25 +60,27 @@ module.exports = new ApplicationCommand({
             return;
         }
 
-        const rankRoles = {
-            '1294004673098809364': 'Staff Captain',
-            '1294004633693585530': 'Captain',
-            'ROLE_ID_3': 'Staff Lieutenant',
-            'ROLE_ID_4': 'Lieutenant',
-            'ROLE_ID_5': 'Master Sergeant',
-            'ROLE_ID_6': 'Staff Sergeant',
-            'ROLE_ID_7': 'Sergeant',
-            'ROLE_ID_8': 'Corporal First Class',
-            'ROLE_ID_9': 'Corporal Second Class',
-            'ROLE_ID_10': 'Senior Deputy',
-            'ROLE_ID_11': 'Deputy',
-            'ROLE_ID_12': 'Probie Deputy'
-        };
+        const rankRoles = [
+            { id: '1297147165654777867', name: 'Captain' },
+            { id: '1297147062756049008', name: 'Staff Lieutenant' },
+            { id: '1292964686408454195', name: 'Lieutenant' },
+            { id: '1259796857312247912', name: 'Master Sergeant' },
+            { id: '1292965455966769276', name: 'Staff Sergeant' },
+            { id: '1259796857312247910', name: 'Sergeant' },
+            { id: '1274804209287561328', name: 'Corporal First Class' },
+            { id: '1259796857312247909', name: 'Corporal Second Class' },
+            { id: '1259796857303863314', name: 'Master Deputy' },
+            { id: '1259796857303863313', name: 'Senior Deputy' },
+            { id: '1259796857303863312', name: 'Deputy III' },
+            { id: '1259796857303863311', name: 'Deputy II' },
+            { id: '1259796857303863310', name: 'Deputy I' },
+            { id: '1259796857303863309', name: 'Probie Deputy' }
+        ];
 
         let rank = null;
-        for (const [roleId, rankName] of Object.entries(rankRoles)) {
-            if (targetMember.roles.cache.has(roleId)) {
-                rank = rankName;
+        for (const role of rankRoles) {
+            if (targetMember.roles.cache.has(role.id)) {
+                rank = role.name;
                 break;
             }
         }
@@ -97,8 +99,8 @@ module.exports = new ApplicationCommand({
             .setDescription(`Kto wystawił: <@${author.id}>​`) 
             .addFields(
                 { name: '**------------------------------------------------------------------**', value: ' '},
-                { name: 'Kto: ', value: `<@${target.id}>`, inline: true},
-                { name: 'Stopień: ', value: `${rank}`, inline: true, },
+                { name: 'Funkcjonariusz: ', value: `<@${target.id}>`, inline: true},
+                { name: 'Stopień: ', value: `${rank}`, inline: true },
                 { name: 'Powód: ', value: `${reason}`, inline: true },
                 { name: '**------------------------------------------------------------------**', value: ' ', inline: true }
             )
@@ -110,9 +112,10 @@ module.exports = new ApplicationCommand({
             const channelId = '1294040234853404765'; 
             const channel = client.channels.cache.get(channelId);
             if (channel) {
+                await channel.send(`<@${target.id}>`);
                 await channel.send({ embeds: [embed] });
                 await interaction.reply({
-                    content: 'Ktoś został zwolniony.',
+                    content: 'Funkcjonariusz został zwolniony.',
                     ephemeral: true
                 });
             } else {
@@ -123,6 +126,7 @@ module.exports = new ApplicationCommand({
             }
             await targetMember.roles.set([]);
         } catch (err) {
+            console.error(err);
             await interaction.followUp({
                 content: 'Nie udało się usunąć ról od funkcjonariusza.',
                 ephemeral: true
