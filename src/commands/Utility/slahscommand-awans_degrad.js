@@ -105,7 +105,7 @@ module.exports = new ApplicationCommand({
         let currentRankIndex = rankRoles.findIndex(role => targetMember.roles.cache.has(role.id));
         if (currentRankIndex === -1) {
             await interaction.reply({
-                content: 'Nie udało się ustalić stopnia użytkownika.',
+                content: 'Nie udało się ustalić stopnia funkcjonraiusza.',
                 ephemeral: true
             });
             return;
@@ -115,7 +115,7 @@ module.exports = new ApplicationCommand({
         if (action === 'promote') {
             if (currentRankIndex === 0) {
                 await interaction.reply({
-                    content: 'Użytkownik ma już najwyższy stopień.',
+                    content: 'Funkcjonraiusz ma już najwyższy stopień.',
                     ephemeral: true
                 });
                 return;
@@ -124,7 +124,7 @@ module.exports = new ApplicationCommand({
         } else if (action === 'demote') {
             if (currentRankIndex === rankRoles.length - 1) {
                 await interaction.reply({
-                    content: 'Użytkownik ma już najniższy stopień.',
+                    content: 'Funkcjonraiusz ma już najniższy stopień.',
                     ephemeral: true
                 });
                 return;
