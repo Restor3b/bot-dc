@@ -168,7 +168,7 @@ module.exports = new ApplicationCommand({
                 if (channel) {
                     await channel.send({ embeds: [embed] });
                     await interaction.reply({
-                        content: `Użytkownik został ${action === 'promote' ? 'awansowany' : 'zdegradowany'} na stopień ${newRank.name}.`,
+                        content: `Funkcjonariusz został ${action === 'promote' ? 'awansowany' : 'zdegradowany'} na stopień ${newRank.name}.`,
                         ephemeral: true
                     });
                 } else {
