@@ -11,31 +11,31 @@ module.exports = new ApplicationCommand({
             {
                 name: 'osoba',
                 description: 'Funkcjonariusz, któremu dodajesz rangę urlop',
-                type: 6, // USER type
+                type: 6, 
                 required: true
             },
             {
                 name: 'powod_ooc',
                 description: 'Powód urlopu (OOC)',
-                type: 3, // STRING type
+                type: 3, 
                 required: true
             },
             {
                 name: 'powod_ic',
                 description: 'Powód urlopu (IC)',
-                type: 3, // STRING type
+                type: 3, 
                 required: true
             },
             {
                 name: 'do_kiedy',
                 description: 'Data zakończenia urlopu (format: DD-MM-YYYY HH:mm)',
-                type: 3, // STRING type
+                type: 3, 
                 required: true
             },
             {
                 name: 'akcja',
                 description: 'Dodaj lub usuń rangę urlop',
-                type: 3, // STRING type
+                type: 3, 
                 required: true,
                 choices: [
                     {
@@ -59,7 +59,7 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
-        const requiredRoleId = '1294040412184641627';
+        const requiredRoleId = '1259796857291411558';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
             await interaction.reply({
@@ -85,7 +85,7 @@ module.exports = new ApplicationCommand({
             return;
         }
 
-        const vacationRoleId = '1295126992387178556';
+        const vacationRoleId = '1279535711510466601';
         if (action === 'add') {
             try {
                 await targetMember.roles.add(vacationRoleId);
@@ -105,7 +105,7 @@ module.exports = new ApplicationCommand({
                     .setColor(0x2f3136)
                     .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=671d6a8b&is=671c190b&hm=6313f2ba968894d2e2382d3878ee0103179b9fc7209d30ff68451397c33cfdf1&=&format=webp&quality=lossless');
 
-                const channelId = '1294040234853404765';
+                const channelId = '1299672680391245846';
                 const channel = client.channels.cache.get(channelId);
                 if (channel) {
                     await channel.send({ embeds: [embed] });
