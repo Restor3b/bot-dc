@@ -86,18 +86,20 @@ module.exports = new ApplicationCommand({
         }
 
         const rankRoles = [
-            { id: '1294004673098809364', name: 'Staff Captain' },
-            { id: '1294004633693585530', name: 'Captain' },
-            { id: 'ROLE_ID_3', name: 'Staff Lieutenant' },
-            { id: 'ROLE_ID_4', name: 'Lieutenant' },
-            { id: 'ROLE_ID_5', name: 'Master Sergeant' },
-            { id: 'ROLE_ID_6', name: 'Staff Sergeant' },
-            { id: 'ROLE_ID_7', name: 'Sergeant' },
-            { id: 'ROLE_ID_8', name: 'Corporal First Class' },
-            { id: 'ROLE_ID_9', name: 'Corporal Second Class' },
-            { id: 'ROLE_ID_10', name: 'Senior Deputy' },
-            { id: 'ROLE_ID_11', name: 'Deputy' },
-            { id: 'ROLE_ID_12', name: 'Probie Deputy' }
+            { id: '1297147165654777867', name: 'Captain' },
+            { id: '1297147062756049008', name: 'Staff Lieutenant' },
+            { id: '1292964686408454195', name: 'Lieutenant' },
+            { id: '1259796857312247912', name: 'Master Sergeant' },
+            { id: '1292965455966769276', name: 'Staff Sergeant' },
+            { id: '1259796857312247910', name: 'Sergeant' },
+            { id: '1274804209287561328', name: 'Corporal First Class' },
+            { id: '1259796857312247909', name: 'Corporal Second Class' },
+            { id: '1259796857303863314', name: 'Master Deputy' },
+            { id: '1259796857303863313', name: 'Senior Deputy' },
+            { id: '1259796857303863312', name: 'Deputy III' },
+            { id: '1259796857303863311', name: 'Deputy II' },
+            { id: '1259796857303863310', name: 'Deputy I' },
+            { id: '1259796857303863309', name: 'Probie Deputy' }
         ];
 
         let currentRankIndex = rankRoles.findIndex(role => targetMember.roles.cache.has(role.id));
@@ -153,7 +155,7 @@ module.exports = new ApplicationCommand({
                 .setColor(0x2f3136)
                 .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=671d6a8b&is=671c190b&hm=6313f2ba968894d2e2382d3878ee0103179b9fc7209d30ff68451397c33cfdf1&=&format=webp&quality=lossless');
 
-            const channelId = '1294040234853404765';
+            const channelId = '1299672680391245846';
             const channel = client.channels.cache.get(channelId);
             if (channel) {
                 await channel.send({ embeds: [embed] });
