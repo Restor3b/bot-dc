@@ -132,7 +132,7 @@ module.exports = new ApplicationCommand({
             newRankIndex = currentRankIndex + 1;
         }
 
-        
+        const newRank = rankRoles[newRankIndex];
         try {
             await targetMember.roles.add(newRank.id);
             await targetMember.roles.remove(rankRoles.filter(role => role.id !== newRank.id).map(role => role.id));
