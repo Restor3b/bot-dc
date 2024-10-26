@@ -136,6 +136,7 @@ module.exports = new ApplicationCommand({
         try {
             await targetMember.roles.add(newRank.id);
             await targetMember.roles.remove(rankRoles.filter(role => role.id !== newRank.id).map(role => role.id));
+            await channel.send(`<@${target.id}>`);
             const embed = new EmbedBuilder()
                 .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
                 .setTitle(`Zmiana stopnia funkcjonariusza`)
