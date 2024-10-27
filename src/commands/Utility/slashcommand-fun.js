@@ -35,6 +35,23 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
+        const allowedRoleIds = [
+            '1259796857312247913',
+            '1259796857245143044',
+            '1259796857324965910',
+            '1295825053585379449'
+        ];
+        const member = interaction.guild.members.cache.get(interaction.user.id);
+        const hasPermission = allowedRoleIds.some(roleId => member.roles.cache.has(roleId));
+
+        if (!hasPermission) {
+            await interaction.reply({
+                content: 'Jesteś zbyt biedny aby użyć tej komendy.',
+                ephemeral: true
+            });
+            return;
+        }
+
         const selectedGif = interaction.options.getString('gif');
         const gifUrls = {
             '1': 'https://cdn.discordapp.com/attachments/1006335243210469506/1287831210692837386/ezgif-3-df5adc68a7.gif?ex=671e7b47&is=671d29c7&hm=d378fcfe526710d681143cace259bc59840ea54efa90a8072710f1733086f825&',
