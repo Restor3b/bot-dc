@@ -14,14 +14,14 @@ module.exports = new ApplicationCommand({
                 type: 3,
                 required: true,
                 choices: [
-                    { name: 'Gif 1', value: '1' },
-                    { name: 'Gif 2', value: '2' },
-                    { name: 'Gif 3', value: '3' },
-                    { name: 'Gif 4', value: '4' },
-                    { name: 'Gif 5', value: '5' },
-                    { name: 'Gif 6', value: '6' },
-                    { name: 'Gif 7', value: '7' },
-                    { name: 'Gif 8', value: '8' }
+                    { name: 'Hansley - stopien', value: '1' },
+                    { name: 'Hunter - impostor', value: '2' },
+                    { name: 'Norton - idz sobie', value: '3' },
+                    { name: 'Bennet - mocny statement', value: '4' },
+                    { name: 'Hansley - mitomania', value: '5' },
+                    { name: 'Brown - dobro', value: '6' },
+                    { name: 'Hansley - zainteresowania', value: '7' },
+                    { name: 'Norton - opinia', value: '8' }
                 ]
             }
         ]
