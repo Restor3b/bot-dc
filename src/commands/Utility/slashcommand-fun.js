@@ -36,7 +36,6 @@ module.exports = new ApplicationCommand({
      */
     run: async (client, interaction) => {
         const allowedRoleIds = [
-            '1259796857312247913',
             '1259796857245143044',
             '1259796857324965910',
             '1295825053585379449'
