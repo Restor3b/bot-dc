@@ -39,7 +39,8 @@ module.exports = new ApplicationCommand({
             '1259796857312247913',
             '1259796857245143044',
             '1259796857324965910',
-            '1295825053585379449'
+            '1295825053585379449',
+            '1259796857291411559'
         ];
         const member = interaction.guild.members.cache.get(interaction.user.id);
         const hasPermission = allowedRoleIds.some(roleId => member.roles.cache.has(roleId));
