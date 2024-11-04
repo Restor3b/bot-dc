@@ -4,19 +4,13 @@ const ApplicationCommand = require("../../structure/ApplicationCommand");
 
 module.exports = new ApplicationCommand({
     command: {
-        name: 'zwolnij',
-        description: 'Zwolnij funkcjonariusza z wydziału',
+        name: 'wypowiedzenie',
+        description: 'Wypowiedzenie funkcjonariusza z wydziału',
         type: 1, 
         options: [
             {
-                name: 'osoba',
-                description: 'Funkcjonariusz, który ma zostać zwolniony',
-                type: 6, 
-                required: true
-            },
-            {
                 name: 'powod',
-                description: 'Powód zwolnienia',
+                description: 'Powód wypowiedzenia',
                 type: 3, 
                 required: true
             }
@@ -31,7 +25,7 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
-        const requiredRoleId = '1299662554473435186'; 
+        const requiredRoleId = '1299662554473435186';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
             await interaction.reply({
@@ -40,25 +34,9 @@ module.exports = new ApplicationCommand({
             });
             return;
         }
-        const target = interaction.options.getUser('osoba');
-        if (target.id === interaction.user.id) {
-            await interaction.reply({
-                content: 'Nie możesz zwolnić samego siebie!',
-                ephemeral: true
-            });
-            return;
-        }
-        const targetMember = interaction.guild.members.cache.get(target.id);
+        const targetMember = interaction.guild.members.cache.get(interaction.user.id);
         const reason = interaction.options.getString('powod');
         const author = interaction.user;
-
-        if (!targetMember) {
-            await interaction.reply({
-                content: 'Nieprawidłowa osoba!',
-                ephemeral: true
-            });
-            return;
-        }
 
         const rankRoles = [
             { id: '1297147165654777867', name: 'Captain' },
@@ -95,27 +73,27 @@ module.exports = new ApplicationCommand({
 
         const embed = new EmbedBuilder()
             .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
-            .setTitle('Ktoś został zwolniony')
-            .setDescription(`Kto wystawił: <@${author.id}>​`) 
+            .setTitle('Ktoś złożył wypowiedzenie')
+            .setDescription(`Kto złożył: <@${author.id}>​`) 
             .addFields(
                 { name: '**------------------------------------------------------------------**', value: ' '},
-                { name: 'Funkcjonariusz: ', value: `<@${target.id}>`, inline: true},
+                { name: 'Funkcjonariusz: ', value: `<@${author.id}>`, inline: true},
                 { name: 'Stopień: ', value: `${rank}`, inline: true },
                 { name: 'Powód: ', value: `${reason}`, inline: true },
                 { name: '**------------------------------------------------------------------**', value: ' ', inline: true }
             )
             .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
             .setColor(0x2f3136)
-            .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=672a998b&is=6729480b&hm=52ba417193a104ec17b01de39cca9f568b52373fb342b35b0355d8223d4d3e4c&=&format=webp&quality=lossless');
+            .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=671d6a8b&is=671c190b&hm=6313f2ba968894d2e2382d3878ee0103179b9fc7209d30ff68451397c33cfdf1&=&format=webp&quality=lossless');
         
         try {
             const channelId = '1259796858524536910'; 
             const channel = client.channels.cache.get(channelId);
             if (channel) {
-                await channel.send(`<@${target.id}>`);
+                await channel.send(`<@${author.id}>`);
                 await channel.send({ embeds: [embed] });
                 await interaction.reply({
-                    content: 'Funkcjonariusz został zwolniony.',
+                    content: 'Wypowiedzenie zostało złożone.',
                     ephemeral: true
                 });
             } else {
