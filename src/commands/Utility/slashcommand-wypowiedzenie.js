@@ -87,7 +87,7 @@ module.exports = new ApplicationCommand({
             .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=671d6a8b&is=671c190b&hm=6313f2ba968894d2e2382d3878ee0103179b9fc7209d30ff68451397c33cfdf1&=&format=webp&quality=lossless');
         
         try {
-            const channelId = '1259796858524536910'; 
+            const channelId = '1259796858524536911'; 
             const channel = client.channels.cache.get(channelId);
             if (channel) {
                 await channel.send(`<@${author.id}>`);
