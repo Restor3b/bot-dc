@@ -21,7 +21,8 @@ module.exports = new ApplicationCommand({
                     { name: 'Hansley - mitomania', value: '5' },
                     { name: 'Brown - dobro', value: '6' },
                     { name: 'Hansley - zainteresowania', value: '7' },
-                    { name: 'Norton - opinia', value: '8' }
+                    { name: 'Norton - opinia', value: '8' },
+                    { name: 'Kreda - Brown2', value: '9' }
                 ]
             }
         ]
@@ -40,7 +41,8 @@ module.exports = new ApplicationCommand({
             '1259796857245143044',
             '1259796857324965910',
             '1295825053585379449',
-            '1259796857291411559'
+            '1259796857291411559',
+            '1299662554473435186'
         ];
         const member = interaction.guild.members.cache.get(interaction.user.id);
         const hasPermission = allowedRoleIds.some(roleId => member.roles.cache.has(roleId));
@@ -62,7 +64,8 @@ module.exports = new ApplicationCommand({
             '5': 'https://cdn.discordapp.com/attachments/1274713747382075404/1293523865502486560/ezgif.com-animated-gif-maker_2.gif?ex=671e18fa&is=671cc77a&hm=91f2ef02f377acc24372b7b8a207f9e9974ce39e099ac38c5e7862fb271193d6&',
             '6': 'https://cdn.discordapp.com/attachments/1276250899647565938/1284122881630142514/ezgif.com-animated-gif-maker.gif?ex=671e2ca0&is=671cdb20&hm=877f525bdc95359c8f263f62af2072bc347e4fb6240a111aedc1c61e49db0fee&',
             '7': 'https://cdn.discordapp.com/attachments/1259796858813808770/1280957934012203068/ezgif-6-a542e68c1d.gif?ex=671e868a&is=671d350a&hm=50a0e3c9c59147ab143579f313b9e18335f496dbeddb09a00edb2be9ea3b5d70&',
-            '8': 'https://media.discordapp.net/attachments/999072304464154797/1197159988997656597/zjeby_pierdolone.gif?ex=671e361f&is=671ce49f&hm=f1a7c4a448f97b8843d49f70ab3246e751188e63281f740298e718c03ab3a559&'
+            '8': 'https://media.discordapp.net/attachments/999072304464154797/1197159988997656597/zjeby_pierdolone.gif?ex=671e361f&is=671ce49f&hm=f1a7c4a448f97b8843d49f70ab3246e751188e63281f740298e718c03ab3a559&',
+            '9': 'https://cdn.discordapp.com/attachments/1287753915013529641/1304641194604757002/ezgif-3-da9ce28e5a.gif?ex=6730214b&is=672ecfcb&hm=12b996aa5fd83aa733303d6926e506699f59caadb196ec51f31c4ec70f002dee&'
         };
 
         await interaction.reply({
