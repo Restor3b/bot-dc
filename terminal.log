@@ -1,17 +1,18 @@
-[90m[23:23:07][39m [33m[Warning][39m Attempting to connect to the Discord bot... (1)
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: slashcommand-reload.js
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: slashcommand-help.js
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: usercontext-userinfo.js
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: slahscommand-awans_degrad.js
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: slahscommand-urlop.js
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: slashcommand-fun.js
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: slashcommand-ping.js
-[90m[23:23:08][39m [34m[Info][39m Loaded new application command: slashcommand-zwolnij.js
-[90m[23:23:08][39m [32m[OK][39m Successfully loaded 8 application commands and 0 message commands.
-[90m[23:23:08][39m [34m[Info][39m Loaded new component (type: select) : example-menu.js
-[90m[23:23:08][39m [32m[OK][39m Successfully loaded 1 components.
-[90m[23:23:08][39m [34m[Info][39m Loaded new event: onReady.js
-[90m[23:23:08][39m [32m[OK][39m Successfully loaded 1 events.
-[90m[23:23:08][39m [33m[Warning][39m Attempting to register application commands... (this might take a while!)
-[90m[23:23:08][39m [32m[OK][39m Logged in as SASD, took 0.894s.
-[90m[23:23:08][39m [32m[OK][39m Successfully registered application commands. For specific guild? No
+[90m[23:54:21][39m [33m[Warning][39m Attempting to connect to the Discord bot... (1)
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slashcommand-reload.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slashcommand-help.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: usercontext-userinfo.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slahscommand-awans_degrad.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slahscommand-urlop.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slashcommand-fun.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slashcommand-ping.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slashcommand-wypowiedzenie.js
+[90m[23:54:22][39m [34m[Info][39m Loaded new application command: slashcommand-zwolnij.js
+[90m[23:54:22][39m [32m[OK][39m Successfully loaded 9 application commands and 0 message commands.
+[90m[23:54:22][39m [34m[Info][39m Loaded new component (type: select) : example-menu.js
+[90m[23:54:22][39m [32m[OK][39m Successfully loaded 1 components.
+[90m[23:54:22][39m [34m[Info][39m Loaded new event: onReady.js
+[90m[23:54:22][39m [32m[OK][39m Successfully loaded 1 events.
+[90m[23:54:22][39m [33m[Warning][39m Attempting to register application commands... (this might take a while!)
+[90m[23:54:22][39m [32m[OK][39m Logged in as SASD, took 1.138s.
+[90m[23:54:22][39m [32m[OK][39m Successfully registered application commands. For specific guild? No
