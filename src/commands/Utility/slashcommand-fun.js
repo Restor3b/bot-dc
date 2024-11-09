@@ -66,7 +66,6 @@ module.exports = new ApplicationCommand({
             '7': 'https://cdn.discordapp.com/attachments/1259796858813808770/1280957934012203068/ezgif-6-a542e68c1d.gif?ex=671e868a&is=671d350a&hm=50a0e3c9c59147ab143579f313b9e18335f496dbeddb09a00edb2be9ea3b5d70&',
             '8': 'https://media.discordapp.net/attachments/999072304464154797/1197159988997656597/zjeby_pierdolone.gif?ex=671e361f&is=671ce49f&hm=f1a7c4a448f97b8843d49f70ab3246e751188e63281f740298e718c03ab3a559&',
             '9': 'https://cdn.discordapp.com/attachments/1287753915013529641/1304641194604757002/ezgif-3-da9ce28e5a.gif?ex=6730214b&is=672ecfcb&hm=12b996aa5fd83aa733303d6926e506699f59caadb196ec51f31c4ec70f002dee&'
-            ggg
         };
 
         await interaction.reply({
