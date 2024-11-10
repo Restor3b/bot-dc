@@ -128,7 +128,7 @@ module.exports = new ApplicationCommand({
                     )
                     .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
                     .setColor(0x2f3136)
-                    .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=672a998b&is=6729480b&hm=52ba417193a104ec17b01de39cca9f568b52373fb342b35b0355d8223d4d3e4c&=&format=webp&quality=lossless');
+                    .setThumbnail('');
 
                 const channelId = '1259796858524536912';
                 let channel = client.channels.cache.get(channelId);
