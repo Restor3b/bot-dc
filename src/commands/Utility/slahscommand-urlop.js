@@ -53,7 +53,7 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
-        const requiredRoleId = '1259796857291411558';d
+        const requiredRoleId = '1259796857291411558';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
             await interaction.reply({
