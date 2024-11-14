@@ -69,7 +69,7 @@ module.exports = new ApplicationCommand({
         const requiredRoleId = '1299662554473435186';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
-            await interaction.editReply($1);
+            await interaction.editReply({ content: 'Nie masz uprawnień do użycia tej komendy.' });
             return;
         }
 
@@ -82,7 +82,7 @@ module.exports = new ApplicationCommand({
         const author = interaction.user;
 
         if (!targetMember) {
-            await interaction.editReply($1);
+            await interaction.editReply({ content: 'Nie masz uprawnień do użycia tej komendy.' });
             return;
         }
 
@@ -105,7 +105,7 @@ module.exports = new ApplicationCommand({
 
         const newRankId = rankRoles[newRank];
         if (!newRankId) {
-            await interaction.editReply($1);
+            await interaction.editReply({ content: 'Nie masz uprawnień do użycia tej komendy.' });
             return;
         }
 
@@ -134,22 +134,19 @@ module.exports = new ApplicationCommand({
             const channelId = '1259796858524536912';
             let channel = client.channels.cache.get(channelId);
             if (!channel) {
-                await interaction.editReply($1);
+                await interaction.editReply({ content: 'Nie masz uprawnień do użycia tej komendy.' });
                 return;
             }
             await channel.send(`<@${target.id}>`);
             if (channel) {
                 await channel.send({ embeds: [embed] });
-                await interaction.reply({
-                    content: `Funkcjonariusz został zmieniony na stopień ${newRank}.`,
-                    ephemeral: true
-                });
+                await interaction.editReply({ content: `Funkcjonariusz został zmieniony na stopień ${newRank}.` });
             } else {
-                await interaction.editReply($1);
+                await interaction.editReply({ content: 'Nie masz uprawnień do użycia tej komendy.' });
             }
         } catch (err) {
             console.error(err);
-            await interaction.editReply($1);
+            await interaction.editReply({ content: 'Nie masz uprawnień do użycia tej komendy.' });
         }
     }
 }).toJSON();
