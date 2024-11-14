@@ -65,13 +65,11 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
+        await interaction.deferReply({ ephemeral: true });
         const requiredRoleId = '1299662554473435186';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
-            await interaction.reply({
-                content: 'Nie masz uprawnień do użycia tej komendy.',
-                ephemeral: true
-            });
+            await interaction.editReply($1);
             return;
         }
 
@@ -84,10 +82,7 @@ module.exports = new ApplicationCommand({
         const author = interaction.user;
 
         if (!targetMember) {
-            await interaction.reply({
-                content: 'Nieprawidłowa osoba!',
-                ephemeral: true
-            });
+            await interaction.editReply($1);
             return;
         }
 
@@ -110,10 +105,7 @@ module.exports = new ApplicationCommand({
 
         const newRankId = rankRoles[newRank];
         if (!newRankId) {
-            await interaction.reply({
-                content: 'Nieprawidłowy stopień!',
-                ephemeral: true
-            });
+            await interaction.editReply($1);
             return;
         }
 
@@ -142,10 +134,7 @@ module.exports = new ApplicationCommand({
             const channelId = '1259796858524536912';
             let channel = client.channels.cache.get(channelId);
             if (!channel) {
-                await interaction.reply({
-                    content: 'Nie udało się znaleźć określonego kanału.',
-                    ephemeral: true
-                });
+                await interaction.editReply($1);
                 return;
             }
             await channel.send(`<@${target.id}>`);
@@ -156,17 +145,11 @@ module.exports = new ApplicationCommand({
                     ephemeral: true
                 });
             } else {
-                await interaction.reply({
-                    content: 'Nie udało się znaleźć określonego kanału.',
-                    ephemeral: true
-                });
+                await interaction.editReply($1);
             }
         } catch (err) {
             console.error(err);
-            await interaction.reply({
-                content: 'Nie udało się zmienić rangi użytkownika.',
-                ephemeral: true
-            });
+            await interaction.editReply($1);
         }
     }
 }).toJSON();
