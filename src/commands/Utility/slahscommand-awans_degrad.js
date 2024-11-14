@@ -1,4 +1,4 @@
-const { ChatInputCommandInteraction, EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require("discord.js");
+const { ChatInputCommandInteraction } = require("discord.js");
 const DiscordBot = require("../../client/DiscordBot");
 const ApplicationCommand = require("../../structure/ApplicationCommand");
 
@@ -31,6 +31,28 @@ module.exports = new ApplicationCommand({
                 description: 'Numer odznaki po zmianie',
                 type: 3, 
                 required: true
+            },
+            {
+                name: 'stopien',
+                description: 'Wybierz nowy stopień',
+                type: 3,
+                required: true,
+                choices: [
+                    { name: 'Captain', value: 'Captain' },
+                    { name: 'Staff Lieutenant', value: 'Staff Lieutenant' },
+                    { name: 'Lieutenant', value: 'Lieutenant' },
+                    { name: 'Master Sergeant', value: 'Master Sergeant' },
+                    { name: 'Staff Sergeant', value: 'Staff Sergeant' },
+                    { name: 'Sergeant', value: 'Sergeant' },
+                    { name: 'Corporal Second Class', value: 'Corporal Second Class' },
+                    { name: 'Corporal First Class', value: 'Corporal First Class' },
+                    { name: 'Master Deputy', value: 'Master Deputy' },
+                    { name: 'Senior Deputy', value: 'Senior Deputy' },
+                    { name: 'Deputy III', value: 'Deputy III' },
+                    { name: 'Deputy II', value: 'Deputy II' },
+                    { name: 'Deputy I', value: 'Deputy I' },
+                    { name: 'Probie Deputy', value: 'Probie Deputy' }
+                ]
             }
         ]
     },
@@ -58,6 +80,7 @@ module.exports = new ApplicationCommand({
         const reason = interaction.options.getString('powod');
         const badgeNumberBefore = interaction.options.getString('nr_odznaki_przed');
         const badgeNumberAfter = interaction.options.getString('nr_odznaki_po');
+        const newRank = interaction.options.getString('stopien');
         const author = interaction.user;
 
         if (!targetMember) {
@@ -68,106 +91,82 @@ module.exports = new ApplicationCommand({
             return;
         }
 
-        const rankRoles = [
-            { id: '1297147165654777867', name: 'Captain' },
-            { id: '1297147062756049008', name: 'Staff Lieutenant' },
-            { id: '1292964686408454195', name: 'Lieutenant' },
-            { id: '1259796857312247912', name: 'Master Sergeant' },
-            { id: '1292965455966769276', name: 'Staff Sergeant' },
-            { id: '1259796857312247910', name: 'Sergeant' },
-            { id: '1259796857312247909', name: 'Corporal Second Class' },
-            { id: '1274804209287561328', name: 'Corporal First Class' },
-            { id: '1259796857303863314', name: 'Master Deputy' },
-            { id: '1259796857303863313', name: 'Senior Deputy' },
-            { id: '1259796857303863312', name: 'Deputy III' },
-            { id: '1259796857303863311', name: 'Deputy II' },
-            { id: '1259796857303863310', name: 'Deputy I' },
-            { id: '1259796857303863309', name: 'Probie Deputy' }
-        ];
+        const rankRoles = {
+            'Captain': '1297147165654777867',
+            'Staff Lieutenant': '1297147062756049008',
+            'Lieutenant': '1292964686408454195',
+            'Master Sergeant': '1259796857312247912',
+            'Staff Sergeant': '1292965455966769276',
+            'Sergeant': '1259796857312247910',
+            'Corporal Second Class': '1259796857312247909',
+            'Corporal First Class': '1274804209287561328',
+            'Master Deputy': '1259796857303863314',
+            'Senior Deputy': '1259796857303863313',
+            'Deputy III': '1259796857303863312',
+            'Deputy II': '1259796857303863311',
+            'Deputy I': '1259796857303863310',
+            'Probie Deputy': '1259796857303863309'
+        };
 
-        const selectMenu = new StringSelectMenuBuilder()
-            .setCustomId('rank_selection')
-            .setPlaceholder('Wybierz nowy stopień funkcjonariusza')
-            .addOptions(rankRoles.map(rank => ({
-                label: rank.name,
-                value: rank.id
-            })));
+        const newRankId = rankRoles[newRank];
+        if (!newRankId) {
+            await interaction.reply({
+                content: 'Nieprawidłowy stopień!',
+                ephemeral: true
+            });
+            return;
+        }
 
-        const row = new ActionRowBuilder().addComponents(selectMenu);
+        try {
+            await targetMember.roles.add(newRankId);
+            await targetMember.roles.remove(Object.values(rankRoles).filter(roleId => roleId !== newRankId));
 
-        await interaction.reply({
-            content: 'Wybierz nowy stopień dla funkcjonariusza:',
-            components: [row],
-            ephemeral: true
-        });
+            const embed = new EmbedBuilder()
+                .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
+                .setTitle(`Zmiana stopnia funkcjonariusza`)
+                .setDescription(`Kto dokonał zmiany: <@${author.id}>`)
+                .addFields(
+                    { name: '**------------------------------------------------------------------**', value: ' '},
+                    { name: 'Funkcjonariusz: ', value: `<@${target.id}>`, inline: true},
+                    { name: 'Nowy stopień: ', value: `${newRank}`, inline: true },
+                    { name: 'Powód: ', value: `${reason}`, inline: true },
+                    { name: 'Nr odznaki przed: ', value: `${badgeNumberBefore}`, inline: true },
+                    { name: 'Nr odznaki po: ', value: `${badgeNumberAfter}`, inline: true },
+                    { name: ' ', value: ' ', inline: true },
+                    { name: '**------------------------------------------------------------------**', value: ' ', inline: true }
+                )
+                .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
+                .setColor(0x2f3136)
+                .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=67371fcb&is=6735ce4b&hm=61111b91dbed6885f3246c0df49727602aed4e3ace52730dfe9f988e4167fbd8&=&format=webp&quality=lossless');
 
-        const filter = (i) => i.customId === 'rank_selection' && i.user.id === interaction.user.id;
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 60000 });
-
-        collector.on('collect', async (i) => {
-            const newRankId = i.values[0];
-            const newRank = rankRoles.find(rank => rank.id === newRankId);
-
-            try {
-                await targetMember.roles.add(newRank.id);
-                await targetMember.roles.remove(rankRoles.filter(role => role.id !== newRank.id).map(role => role.id));
-
-                const embed = new EmbedBuilder()
-                    .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
-                    .setTitle(`Zmiana stopnia funkcjonariusza`)
-                    .setDescription(`Kto dokonał zmiany: <@${author.id}>`)
-                    .addFields(
-                        { name: '**------------------------------------------------------------------**', value: ' '},
-                        { name: 'Funkcjonariusz: ', value: `<@${target.id}>`, inline: true},
-                        { name: 'Nowy stopień: ', value: `${newRank.name}`, inline: true },
-                        { name: 'Powód: ', value: `${reason}`, inline: true },
-                        { name: 'Nr odznaki przed: ', value: `${badgeNumberBefore}`, inline: true },
-                        { name: 'Nr odznaki po: ', value: `${badgeNumberAfter}`, inline: true },
-                        { name: ' ', value: ' ', inline: true },
-                        { name: '**------------------------------------------------------------------**', value: ' ', inline: true }
-                    )
-                    .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
-                    .setColor(0x2f3136)
-                    .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=67371fcb&is=6735ce4b&hm=61111b91dbed6885f3246c0df49727602aed4e3ace52730dfe9f988e4167fbd8&=&format=webp&quality=lossless');
-
-                const channelId = '1259796858524536912';
-                let channel = client.channels.cache.get(channelId);
-                if (!channel) {
-                    await i.reply({
-                        content: 'Nie udało się znaleźć określonego kanału.',
-                        ephemeral: true
-                    });
-                    return;
-                }
-                await channel.send(`<@${target.id}>`);
-                if (channel) {
-                    await channel.send({ embeds: [embed] });
-                    await i.reply({
-                        content: `Funkcjonariusz został zmieniony na stopień ${newRank.name}.`,
-                        ephemeral: true
-                    });
-                } else {
-                    await i.reply({
-                        content: 'Nie udało się znaleźć określonego kanału.',
-                        ephemeral: true
-                    });
-                }
-            } catch (err) {
-                console.error(err);
-                await i.reply({
-                    content: 'Nie udało się zmienić rangi użytkownika.',
+            const channelId = '1259796858524536912';
+            let channel = client.channels.cache.get(channelId);
+            if (!channel) {
+                await interaction.reply({
+                    content: 'Nie udało się znaleźć określonego kanału.',
+                    ephemeral: true
+                });
+                return;
+            }
+            await channel.send(`<@${target.id}>`);
+            if (channel) {
+                await channel.send({ embeds: [embed] });
+                await interaction.reply({
+                    content: `Funkcjonariusz został zmieniony na stopień ${newRank}.`,
+                    ephemeral: true
+                });
+            } else {
+                await interaction.reply({
+                    content: 'Nie udało się znaleźć określonego kanału.',
                     ephemeral: true
                 });
             }
-        });
-
-        collector.on('end', collected => {
-            if (collected.size === 0) {
-                interaction.followUp({
-                    content: 'Czas na wybór stopnia minął.',
-                    ephemeral: true
-                });
-            }
-        });
+        } catch (err) {
+            console.error(err);
+            await interaction.reply({
+                content: 'Nie udało się zmienić rangi użytkownika.',
+                ephemeral: true
+            });
+        }
     }
 }).toJSON();
