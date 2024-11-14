@@ -1,4 +1,4 @@
-const { ChatInputCommandInteraction } = require("discord.js");
+const { ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 const DiscordBot = require("../../client/DiscordBot");
 const ApplicationCommand = require("../../structure/ApplicationCommand");
 
