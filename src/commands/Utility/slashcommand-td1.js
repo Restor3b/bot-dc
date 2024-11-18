@@ -27,6 +27,15 @@ module.exports = new ApplicationCommand({
                 required: true,
                 choices: [
                     { name: 'Deputy egzamin', value: 'Deputy egzamin' },
+                    { name: 'ASD', value: 'ASD' },
+                    { name: 'SV', value: 'SV' },
+                    { name: 'RTO', value: 'RTO' },
+                    { name: 'KPP', value: 'KPP' },
+                    { name: 'PWC', value: 'PWC' },
+                    { name: 'MVE', value: 'MVE' },
+                    { name: 'SEU', value: 'SEU' },
+                    { name: 'WSU', value: 'WSU' },
+                    { name: 'NEG', value: 'NEG' },
                     { name: 'Inny rodzaj szkolenia', value: 'Inny rodzaj szkolenia' } // <-- Dodaj inne rodzaje szkolenia wedle potrzeby
                 ]
             },
@@ -96,7 +105,7 @@ module.exports = new ApplicationCommand({
             )
             .setColor(0x2f3136);
 
-        const channelId = '1259796858654429292';
+        const channelId = '1259796858524536912';
         let channel = client.channels.cache.get(channelId);
         if (!channel) {
             await interaction.editReply({ content: 'Nie znaleziono kanału do wysłania wiadomości.' });
