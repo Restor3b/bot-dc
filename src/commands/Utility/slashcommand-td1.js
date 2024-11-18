@@ -96,7 +96,7 @@ module.exports = new ApplicationCommand({
             )
             .setColor(0x2f3136);
 
-        const channelId = '1259796858524536912';
+        const channelId = '1259796858654429292';
         let channel = client.channels.cache.get(channelId);
         if (!channel) {
             await interaction.editReply({ content: 'Nie znaleziono kanału do wysłania wiadomości.' });
