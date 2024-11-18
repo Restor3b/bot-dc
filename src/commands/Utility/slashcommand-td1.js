@@ -81,7 +81,7 @@ module.exports = new ApplicationCommand({
             wynikOpis = `zdany ${liczbaPunktow}/229`;
         }
 
-        const podpis = szkoleniowiec.username;
+        const podpis = interaction.member.nickname || szkoleniowiec.username;
 
         const embed = new EmbedBuilder()
             .setAuthor({ name: szkoleniowiec.username, iconURL: szkoleniowiec.displayAvatarURL() })
@@ -96,7 +96,7 @@ module.exports = new ApplicationCommand({
             )
             .setColor(0x2f3136);
 
-        const channelId = '1259796858654429292';
+        const channelId = '1259796858524536912';
         let channel = client.channels.cache.get(channelId);
         if (!channel) {
             await interaction.editReply({ content: 'Nie znaleziono kanału do wysłania wiadomości.' });
