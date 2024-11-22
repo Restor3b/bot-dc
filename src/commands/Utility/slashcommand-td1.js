@@ -36,7 +36,7 @@ module.exports = new ApplicationCommand({
                     { name: 'SEU', value: 'SEU' },
                     { name: 'WSU', value: 'WSU' },
                     { name: 'NEG', value: 'NEG' },
-                    { name: 'Inny rodzaj szkolenia', value: 'Inny rodzaj szkolenia' } // <-- Dodaj inne rodzaje szkolenia wedle potrzeby
+                    { name: 'Inny rodzaj szkolenia', value: 'Inny rodzaj szkolenia' }
                 ]
             },
             {
@@ -116,6 +116,7 @@ module.exports = new ApplicationCommand({
         }
 
         try {
+            await channel.send(`<@${osobaSzkolona.id}>`);
             await channel.send({ embeds: [embed] });
             await interaction.editReply({ content: 'Informacja o szkoleniu została wysłana.' });
         } catch (err) {
