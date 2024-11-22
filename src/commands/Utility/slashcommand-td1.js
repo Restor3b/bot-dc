@@ -97,7 +97,7 @@ module.exports = new ApplicationCommand({
             .setTitle(`Informacja o szkoleniu`)
             .addFields(
                 { name: '**------------------------------------------------------------------**', value: ' '},
-                { name: 'Osoba szkolona: ', value: `<@${osobaSzkolona.id}>`},
+                { name: 'Osoba szkolona:', value: `<@${osobaSzkolona.id}>`},
                 { name: 'Szkoleniowiec: ', value: `<@${szkoleniowiec.id}>`},
                 { name: 'Rodzaj szkolenia: ', value: `${rodzajSzkolenia}`, inline: true },
                 { name: 'Wynik egzaminu: ', value: `${wynikOpis}`, inline: true },
