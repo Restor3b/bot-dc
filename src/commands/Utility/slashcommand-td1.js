@@ -99,13 +99,14 @@ module.exports = new ApplicationCommand({
                 { name: '**------------------------------------------------------------------**', value: ' '},
                 { name: 'Osoba szkolona:', value: `<@${osobaSzkolona.id}>`},
                 { name: 'Szkoleniowiec: ', value: `<@${szkoleniowiec.id}>`},
-                { name: 'Rodzaj szkolenia: ', value: `${rodzajSzkolenia}`, inline: true },
-                { name: 'Wynik egzaminu: ', value: `${wynikOpis}`, inline: true },
+                { name: 'Rodzaj szkolenia: ', value: `${rodzajSzkolenia}`},
+                { name: 'Wynik egzaminu: ', value: `${wynikOpis}`},
                 { name: 'Data: ', value: `${dataSzkolenia}`},
                 { name: 'Podpis: ', value: `${podpis}`},
                 { name: '**------------------------------------------------------------------**', value: ' '}
             )
-            .setColor(0x2f3136);
+            .setColor(0x2f3136)
+            .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=67371fcb&is=6735ce4b&hm=61111b91dbed6885f3246c0df49727602aed4e3ace52730dfe9f988e4167fbd8&=&format=webp&quality=lossless');
 
         const channelId = '1299672680391245846';
         let channel = client.channels.cache.get(channelId);
