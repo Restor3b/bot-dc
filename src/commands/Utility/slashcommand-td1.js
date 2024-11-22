@@ -96,12 +96,14 @@ module.exports = new ApplicationCommand({
             .setAuthor({ name: szkoleniowiec.username, iconURL: szkoleniowiec.displayAvatarURL() })
             .setTitle(`Informacja o szkoleniu`)
             .addFields(
-                { name: 'Osoba szkolona: ', value: `<@${osobaSzkolona.id}>`, inline: true },
-                { name: 'Szkoleniowiec: ', value: `<@${szkoleniowiec.id}>`  },
+                { name: '**------------------------------------------------------------------**', value: ' '},
+                { name: 'Osoba szkolona: ', value: `<@${osobaSzkolona.id}>`},
+                { name: 'Szkoleniowiec: ', value: `<@${szkoleniowiec.id}>`},
                 { name: 'Rodzaj szkolenia: ', value: `${rodzajSzkolenia}`, inline: true },
                 { name: 'Wynik egzaminu: ', value: `${wynikOpis}`, inline: true },
                 { name: 'Data: ', value: `${dataSzkolenia}`, inline: true },
                 { name: 'Podpis: ', value: `${podpis}`, inline: true }
+                { name: '**------------------------------------------------------------------**', value: ' '},
             )
             .setColor(0x2f3136);
 
