@@ -101,8 +101,8 @@ module.exports = new ApplicationCommand({
                 { name: 'Szkoleniowiec: ', value: `<@${szkoleniowiec.id}>`},
                 { name: 'Rodzaj szkolenia: ', value: `${rodzajSzkolenia}`, inline: true },
                 { name: 'Wynik egzaminu: ', value: `${wynikOpis}`, inline: true },
-                { name: 'Data: ', value: `${dataSzkolenia}`, },
-                { name: 'Podpis: ', value: `${podpis}`, inline: true },
+                { name: 'Data: ', value: `${dataSzkolenia}`},
+                { name: 'Podpis: ', value: `${podpis}`},
                 { name: '**------------------------------------------------------------------**', value: ' '}
             )
             .setColor(0x2f3136);
