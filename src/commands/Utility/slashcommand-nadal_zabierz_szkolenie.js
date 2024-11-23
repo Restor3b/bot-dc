@@ -64,7 +64,6 @@ module.exports = new ApplicationCommand({
         const timestamp = new Date().toISOString();
 
         const szkolenieRoles = {
-            'Deputy egzamin': 'Deputy egzamin',
             'ASD': 'ASD',
             'SV': 'SV',
             'RTO': 'RTO',
