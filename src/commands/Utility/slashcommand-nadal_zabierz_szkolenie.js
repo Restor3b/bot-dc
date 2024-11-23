@@ -26,10 +26,23 @@ module.exports = new ApplicationCommand({
                 ]
             },
             {
-                name: 'ranga',
-                description: 'Ranga, którą chcesz nadać lub zabrać',
-                type: 8,
-                required: true
+                name: 'rodzaj_szkolenia',
+                description: 'Wybierz rodzaj szkolenia, które chcesz nadać lub zabrać',
+                type: 3,
+                required: true,
+                choices: [
+                    { name: 'Deputy egzamin', value: 'Deputy egzamin' },
+                    { name: 'ASD', value: 'ASD' },
+                    { name: 'SV', value: 'SV' },
+                    { name: 'RTO', value: 'RTO' },
+                    { name: 'KPP', value: 'KPP' },
+                    { name: 'PWC', value: 'PWC' },
+                    { name: 'MVE', value: 'MVE' },
+                    { name: 'SEU', value: 'SEU' },
+                    { name: 'WSU', value: 'WSU' },
+                    { name: 'NEG', value: 'NEG' },
+                    { name: 'Inny rodzaj szkolenia', value: 'Inny rodzaj szkolenia' }
+                ]
             }
         ]
     },
@@ -46,20 +59,41 @@ module.exports = new ApplicationCommand({
 
         const osobaSzkolona = interaction.options.getMember('osoba_szkolona');
         const akcja = interaction.options.getString('akcja');
-        const ranga = interaction.options.getRole('ranga');
+        const rodzajSzkolenia = interaction.options.getString('rodzaj_szkolenia');
         const userId = interaction.user.id;
         const timestamp = new Date().toISOString();
+
+        const szkolenieRoles = {
+            'Deputy egzamin': 'Deputy egzamin',
+            'ASD': 'ASD',
+            'SV': 'SV',
+            'RTO': 'RTO',
+            'KPP': 'KPP',
+            'PWC': 'PWC',
+            'MVE': 'MVE',
+            'SEU': 'SEU',
+            'WSU': 'WSU',
+            'NEG': 'NEG',
+            'Inny rodzaj szkolenia': 'Inny rodzaj szkolenia'
+        };
+
+        const ranga = szkolenieRoles[rodzajSzkolenia];
+        if (!ranga) {
+            await interaction.editReply({ content: 'Nie znaleziono rangi o podanym ID.' });
+            return;
+        }
 
         try {
             if (akcja === 'nadaj') {
                 await osobaSzkolona.roles.add(ranga);
-                await interaction.editReply({ content: `Ranga ${ranga.name} została nadana ${osobaSzkolona}.` });
+                await interaction.editReply({ content: `Ranga ${rodzajSzkolenia} została nadana ${osobaSzkolona}.` });
             } else if (akcja === 'zabierz') {
                 await osobaSzkolona.roles.remove(ranga);
-                await interaction.editReply({ content: `Ranga ${ranga.name} została zabrana ${osobaSzkolona}.` });
+                await interaction.editReply({ content: `Ranga ${rodzajSzkolenia} została zabrana ${osobaSzkolona}.` });
             }
 
-            const logMessage = `${timestamp} - Użytkownik <@${userId}> użył komendy szkolenie_zarzadzanie na osobie <@${osobaSzkolona.id}> z akcją: ${akcja}, ranga: ${ranga.name}\n`;
+            // Log the action to a file
+            const logMessage = `${timestamp} - Użytkownik <@${userId}> użył komendy szkolenie_zarzadzanie na osobie <@${osobaSzkolona.id}> z akcją: ${akcja}, ranga: ${rodzajSzkolenia}\n`;
             fs.appendFile('szkolenie_logs.txt', logMessage, (err) => {
                 if (err) {
                     console.error('Błąd podczas zapisywania logu:', err);
