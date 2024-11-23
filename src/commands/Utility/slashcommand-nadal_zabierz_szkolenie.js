@@ -73,8 +73,7 @@ module.exports = new ApplicationCommand({
             'MVE': 'MVE',
             'SEU': 'SEU',
             'WSU': 'WSU',
-            'NEG': 'NEG',
-            'Inny rodzaj szkolenia': 'Inny rodzaj szkolenia'
+            'NEG': 'NEG'
         };
 
         const ranga = szkolenieRoles[rodzajSzkolenia];
