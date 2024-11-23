@@ -31,17 +31,14 @@ module.exports = new ApplicationCommand({
                 type: 3,
                 required: true,
                 choices: [
-                    { name: 'Deputy egzamin', value: 'Deputy egzamin' },
                     { name: 'ASD', value: 'ASD' },
                     { name: 'SV', value: 'SV' },
-                    { name: 'RTO', value: 'RTO' },
                     { name: 'KPP', value: 'KPP' },
                     { name: 'PWC', value: 'PWC' },
                     { name: 'MVE', value: 'MVE' },
                     { name: 'SEU', value: 'SEU' },
                     { name: 'WSU', value: 'WSU' },
-                    { name: 'NEG', value: 'NEG' },
-                    { name: 'Inny rodzaj szkolenia', value: 'Inny rodzaj szkolenia' }
+                    { name: 'NEG', value: 'NEG' }
                 ]
             }
         ]
@@ -64,18 +61,18 @@ module.exports = new ApplicationCommand({
         const timestamp = new Date().toISOString();
 
         const szkolenieRoles = {
-            'ASD': 'ASD',
-            'SV': 'SV',
-            'RTO': 'RTO',
-            'KPP': 'KPP',
-            'PWC': 'PWC',
-            'MVE': 'MVE',
-            'SEU': 'SEU',
-            'WSU': 'WSU',
-            'NEG': 'NEG'
+            'ASD': '1259796857253527592',
+            'SV': '1290614425010704585',
+            'KPP': '1259796857253527590',
+            'PWC': '1259796857253527589',
+            'MVE': '1259796857253527588',
+            'SEU': '1259796857253527585',
+            'WSU': '1259796857253527587',
+            'NEG': '1259796857253527584'
         };
 
-        const ranga = szkolenieRoles[rodzajSzkolenia];
+        const rangaId = szkolenieRoles[rodzajSzkolenia];
+        const ranga = interaction.guild.roles.cache.get(rangaId);
         if (!ranga) {
             await interaction.editReply({ content: 'Nie znaleziono rangi o podanym ID.' });
             return;
@@ -90,8 +87,8 @@ module.exports = new ApplicationCommand({
                 await interaction.editReply({ content: `Ranga ${rodzajSzkolenia} została zabrana ${osobaSzkolona}.` });
             }
 
-            // Log the action to a file
-            const logMessage = `${timestamp} - Użytkownik <@${userId}> użył komendy szkolenie_zarzadzanie na osobie <@${osobaSzkolona.id}> z akcją: ${akcja}, ranga: ${rodzajSzkolenia}\n`;
+            const logMessage = `${timestamp} - Użytkownik <@${userId}> użył komendy szkolenie_zarzadzanie na osobie <@${osobaSzkolona.id}> z akcją: ${akcja}, ranga: ${rodzajSzkolenia}
+`;
             fs.appendFile('szkolenie_logs.txt', logMessage, (err) => {
                 if (err) {
                     console.error('Błąd podczas zapisywania logu:', err);
