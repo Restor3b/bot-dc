@@ -29,7 +29,6 @@ module.exports = new ApplicationCommand({
                     { name: 'Deputy egzamin', value: 'Deputy egzamin' },
                     { name: 'ASD', value: 'ASD' },
                     { name: 'SV', value: 'SV' },
-                    { name: 'RTO', value: 'RTO' },
                     { name: 'KPP', value: 'KPP' },
                     { name: 'PWC', value: 'PWC' },
                     { name: 'MVE', value: 'MVE' },
