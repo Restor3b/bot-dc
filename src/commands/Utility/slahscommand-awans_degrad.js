@@ -66,11 +66,7 @@ module.exports = new ApplicationCommand({
      */
     run: async (client, interaction) => {
         await interaction.deferReply({ ephemeral: true });
-        const requiredRoleId = [
-        '1299662554473435186',
-        '1259796857282887784'
-
-    ];
+        const requiredRoleId = '1299662554473435186';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
             await interaction.editReply({ content: 'Nie masz uprawnień do użycia tej komendy.' });
