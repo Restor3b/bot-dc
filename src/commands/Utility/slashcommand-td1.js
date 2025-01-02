@@ -71,6 +71,17 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
+        const requiredRoleId = '1259796857282887781'; 
+        
+        const member = interaction.guild.members.cache.get(interaction.user.id);
+        if (!member.roles.cache.has(requiredRoleId)) {
+            await interaction.reply({
+                content: 'Nie masz uprawnień do użycia tej komendy.',
+                ephemeral: true
+            });
+            return;
+        }
+
         await interaction.deferReply({ ephemeral: true });
 
         const osobaSzkolona = interaction.options.getUser('osoba_szkolona');
@@ -107,6 +118,7 @@ module.exports = new ApplicationCommand({
             .setColor(0x2f3136)
             .setThumbnail('https://media.discordapp.net/attachments/1293717333461827747/1299497166158565457/f85cc66dd65a679d957ca4d6c668d070.png?ex=67371fcb&is=6735ce4b&hm=61111b91dbed6885f3246c0df49727602aed4e3ace52730dfe9f988e4167fbd8&=&format=webp&quality=lossless');
 
+        // Tutaj podaj ID kanału, do którego wiadomość ma zostać wysłana
         const channelId = '1259796858654429292';
         let channel = client.channels.cache.get(channelId);
         if (!channel) {
