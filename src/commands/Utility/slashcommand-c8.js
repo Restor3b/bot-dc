@@ -122,7 +122,7 @@ module.exports = new ApplicationCommand({
                 await googleSheets.spreadsheets.values.append({
                     auth,
                     spreadsheetId,
-                    range: 'test!A:E', // 5 kolumn
+                    range: 'Arkusz1!A:E', // 5 kolumn
                     valueInputOption: 'RAW',
                     resource: {
                         values: newData,
