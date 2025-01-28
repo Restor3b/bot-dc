@@ -51,7 +51,7 @@ module.exports = new ApplicationCommand({
      */
     run: async (client, interaction) => {
         // ID roli wymaganej do użycia komendy (jeśli potrzebne)
-        const requiredRoleId = '1259796857282887781'; 
+        const requiredRoleId = '1299662554473435186'; 
         const member = interaction.guild.members.cache.get(interaction.user.id);
 
         // Sprawdź uprawnienia (jeśli chcesz)
