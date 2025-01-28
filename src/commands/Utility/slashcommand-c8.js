@@ -104,7 +104,7 @@ module.exports = new ApplicationCommand({
             try {
                 // Autoryzacja z użyciem pliku JSON
                 const auth = new google.auth.GoogleAuth({
-                    keyFile: '\src\commands\Utility\bot-dc-449215-43833ac2c28c.json', // Ścieżka do Twojego pliku z kluczem serwisowym
+                    keyFile: '..\Utility\bot-dc-449215-43833ac2c28c.json', // Ścieżka do Twojego pliku z kluczem serwisowym
                     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
                 });
 
