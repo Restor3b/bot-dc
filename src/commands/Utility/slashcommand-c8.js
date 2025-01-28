@@ -1,12 +1,11 @@
 const { ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 const DiscordBot = require("../../client/DiscordBot");
 const ApplicationCommand = require("../../structure/ApplicationCommand");
-// Dodaj import pakietu googleapis
 const { google } = require('googleapis');
 
 module.exports = new ApplicationCommand({
     command: {
-        name: 'szkolenie',
+        name: 'c8',
         description: 'Wysyła dane do Google Sheets.',
         type: 1,
         options: [
