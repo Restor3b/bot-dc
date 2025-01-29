@@ -86,7 +86,7 @@ module.exports = new ApplicationCommand({
             );
 
         // ID kanału, do którego embed ma być wysyłany (jeśli potrzebne)
-        const channelId = '1259796858654429292';
+        const channelId = '1299672680391245846';
         const channel = client.channels.cache.get(channelId);
 
         if (!channel) {
