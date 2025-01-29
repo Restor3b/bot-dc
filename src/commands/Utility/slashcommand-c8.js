@@ -113,7 +113,7 @@ module.exports = new ApplicationCommand({
                 const googleSheets = google.sheets({ version: 'v4', auth: authClient });
 
                 // ID Twojego arkusza
-                const spreadsheetId = '1fjlB6XmGkhzDnHfeyAFSYkRuMCeCzbYKEbvG_IBnRjo';
+                const spreadsheetId = '1Yt5bWu4AE56WVEVZNZSHbE3OU-83XXzqwGSIut1FrHQ';
 
                 // Przygotowujemy dane do zapisania
                 const newData = [[pwc, apwc, iloscFP, kod, uwagi]];
