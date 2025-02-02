@@ -40,16 +40,16 @@ module.exports = new ApplicationCommand({
                 ]
             },
             {
-                name: 'uwagi',
-                description: 'Uwagi',
-                type: 3,
-                required: false
-            },
-            {
                 name: 'obraz',
                 description: 'Załącz obraz',
                 type: 11, // typ Attachment
                 required: true
+            },
+            {
+                name: 'uwagi',
+                description: 'Uwagi',
+                type: 3,
+                required: false
             }
         ]
     },
@@ -83,8 +83,8 @@ module.exports = new ApplicationCommand({
         const apwc = interaction.options.getString('apwc');
         const iloscFP = interaction.options.getInteger('iloscfp');
         const kod = interaction.options.getString('kod'); // Będzie jedną z wybranych opcji
-        const uwagi = interaction.options.getString('uwagi') || 'Brak';
         const obraz = interaction.options.getAttachment('obraz'); // Opcja z załączonym plikiem
+        const uwagi = interaction.options.getString('uwagi') || 'Brak';
 
         // Budujemy embed dla potwierdzenia
         const embed = new EmbedBuilder()
@@ -98,12 +98,12 @@ module.exports = new ApplicationCommand({
                 { name: 'Uwagi', value: uwagi }
             );
         
-        // Dodajemy obraz do embeda (opcjonalnie, można pominąć)
+        // Dodajemy obraz do embeda (jeśli dostępny)
         if (obraz && obraz.url) {
             embed.setImage(obraz.url);
         }
 
-        // ID kanału, do którego embed ma być wysyłany (jeśli potrzebne)
+        // ID kanału, do którego embed ma być wysłany (jeśli potrzebne)
         const channelId = '1299672680391245846';
         const channel = client.channels.cache.get(channelId);
 
