@@ -62,7 +62,7 @@ module.exports = new ApplicationCommand({
      */
     run: async (client, interaction) => {
         // Sprawdzamy, czy użytkownik posiada wymaganą rolę
-        const requiredRoleId = '1299662554473435186'; 
+        const requiredRoleId = '1328034957117100032'; 
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
             await interaction.reply({
