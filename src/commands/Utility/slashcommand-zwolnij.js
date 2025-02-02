@@ -6,18 +6,18 @@ module.exports = new ApplicationCommand({
     command: {
         name: 'zwolnij',
         description: 'Zwolnij funkcjonariusza z wydziału',
-        type: 1, 
+        type: 1,
         options: [
             {
                 name: 'osoba',
                 description: 'Funkcjonariusz, który ma zostać zwolniony',
-                type: 6, 
+                type: 6,
                 required: true
             },
             {
                 name: 'powod',
                 description: 'Powód zwolnienia',
-                type: 3, 
+                type: 3,
                 required: true
             }
         ]
@@ -31,7 +31,7 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
-        const requiredRoleId = '1299662554473435186'; 
+        const requiredRoleId = '1299662554473435186';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
             await interaction.reply({
@@ -96,10 +96,11 @@ module.exports = new ApplicationCommand({
         const embed = new EmbedBuilder()
             .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
             .setTitle('Ktoś został zwolniony')
-            .setDescription(`Kto wystawił: <@${author.id}>​`) 
+            .setDescription(`Kto wystawił: <@${author.id}>​`)
             .addFields(
-                { name: '**------------------------------------------------------------------**', value: ' '},
-                { name: 'Funkcjonariusz: ', value: `<@${target.id}>`, inline: true},
+                { name: '**------------------------------------------------------------------**', value: ' ' },
+                // Zmieniono wartość z <@${target.id}> na pseudonim z serwera
+                { name: 'Funkcjonariusz: ', value: targetMember.displayName, inline: true },
                 { name: 'Stopień: ', value: `${rank}`, inline: true },
                 { name: 'Powód: ', value: `${reason}`, inline: true },
                 { name: '**------------------------------------------------------------------**', value: ' ', inline: true }
@@ -107,9 +108,9 @@ module.exports = new ApplicationCommand({
             .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
             .setColor(0x2f3136)
             .setThumbnail('https://cdn.discordapp.com/attachments/1275544141488717884/1275544141790711949/image.png?ex=677ed88d&is=677d870d&hm=35f546225246cc162b81f0b803a8db9387ee69bcd537035adefd4527bc7546bf&');
-        
+
         try {
-            const channelId = '1259796858524536910'; 
+            const channelId = '1259796858524536910';
             const channel = client.channels.cache.get(channelId);
             if (channel) {
                 await channel.send(`<@${target.id}>`);
