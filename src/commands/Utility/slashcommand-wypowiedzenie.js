@@ -6,12 +6,12 @@ module.exports = new ApplicationCommand({
     command: {
         name: 'wypowiedzenie',
         description: 'Wypowiedzenie funkcjonariusza z wydziału',
-        type: 1, 
+        type: 1,
         options: [
             {
                 name: 'powod',
                 description: 'Powód wypowiedzenia',
-                type: 3, 
+                type: 3,
                 required: true
             }
         ]
@@ -74,10 +74,10 @@ module.exports = new ApplicationCommand({
         const embed = new EmbedBuilder()
             .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
             .setTitle('Ktoś złożył wypowiedzenie')
-            .setDescription(`Kto złożył: <@${author.id}>​`) 
+            .setDescription(`Kto złożył: <@${author.id}>​`)
             .addFields(
-                { name: '**------------------------------------------------------------------**', value: ' '},
-                { name: 'Funkcjonariusz: ', value: `<@${author.id}>`, inline: true},
+                { name: '**------------------------------------------------------------------**', value: ' ' },
+                { name: 'Funkcjonariusz: ', value: targetMember.displayName, inline: true },
                 { name: 'Stopień: ', value: `${rank}`, inline: true },
                 { name: 'Powód: ', value: `${reason}`, inline: true },
                 { name: '**------------------------------------------------------------------**', value: ' ', inline: true }
@@ -85,9 +85,9 @@ module.exports = new ApplicationCommand({
             .setFooter({ text: new Date().toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' }) })
             .setColor(0x2f3136)
             .setThumbnail('https://cdn.discordapp.com/attachments/1275544141488717884/1275544141790711949/image.png?ex=677ed88d&is=677d870d&hm=35f546225246cc162b81f0b803a8db9387ee69bcd537035adefd4527bc7546bf&');
-        
+
         try {
-            const channelId = '1259796858524536911'; 
+            const channelId = '1259796858524536911';
             const channel = client.channels.cache.get(channelId);
             if (channel) {
                 await channel.send(`<@${author.id}>`);
