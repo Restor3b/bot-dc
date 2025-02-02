@@ -6,7 +6,7 @@ const { google } = require('googleapis');
 module.exports = new ApplicationCommand({
     command: {
         name: 'c8',
-        description: 'Wysyła dane do Google Sheets.',
+        description: 'Komenda do opisania c8',
         type: 1,
         options: [
             {
@@ -94,8 +94,8 @@ module.exports = new ApplicationCommand({
 
         // Budowanie embeda zgodnie z wymaganiami
         const embed = new EmbedBuilder()
-            .setTitle('Nowy C8')
-            .setDescription('Szczegóły:')
+            .setTitle('Nowy zapis kodu 8')
+            .setDescription('Szczegóły kodu:')
             .setColor('#2f3136')
             // Pierwszy rząd: PWC i APWC
             .addFields(
