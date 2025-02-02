@@ -29,15 +29,27 @@ module.exports = new ApplicationCommand({
             },
             {
                 name: 'kod',
-                description: 'Wpisz kod',
+                description: 'Wybierz kod',
                 type: 3,
-                required: true
+                required: true,
+                choices: [
+                    { name: 'zielony', value: 'zielony' },
+                    { name: 'pomaranczowy', value: 'pomaranczowy' },
+                    { name: 'czerwony', value: 'czerwony' },
+                    { name: 'czarny', value: 'czarny' }
+                ]
             },
             {
                 name: 'uwagi',
                 description: 'Uwagi',
                 type: 3,
                 required: false
+            },
+            {
+                name: 'obraz',
+                description: 'Załącz obraz',
+                type: 11, // typ Attachment
+                required: true
             }
         ]
     },
@@ -70,8 +82,9 @@ module.exports = new ApplicationCommand({
         const pwc = interaction.options.getString('pwc');
         const apwc = interaction.options.getString('apwc');
         const iloscFP = interaction.options.getInteger('iloscfp');
-        const kod = interaction.options.getString('kod');
+        const kod = interaction.options.getString('kod'); // Będzie jedną z wybranych opcji
         const uwagi = interaction.options.getString('uwagi') || 'Brak';
+        const obraz = interaction.options.getAttachment('obraz'); // Opcja z załączonym plikiem
 
         // Budujemy embed dla potwierdzenia
         const embed = new EmbedBuilder()
@@ -84,6 +97,11 @@ module.exports = new ApplicationCommand({
                 { name: 'Kod', value: kod, inline: true },
                 { name: 'Uwagi', value: uwagi }
             );
+        
+        // Dodajemy obraz do embeda (opcjonalnie, można pominąć)
+        if (obraz && obraz.url) {
+            embed.setImage(obraz.url);
+        }
 
         // ID kanału, do którego embed ma być wysyłany (jeśli potrzebne)
         const channelId = '1299672680391245846';
@@ -99,7 +117,7 @@ module.exports = new ApplicationCommand({
             await channel.send({ embeds: [embed] });
 
             // ---------------------------------
-            // ZAPIS DO GOOGLE SPREADSHEET
+            // ZAPIS DO GOOGLE SPREADSHEET (bez opcji "obraz")
             // ---------------------------------
             try {
                 // Autoryzacja z użyciem pliku JSON
@@ -115,7 +133,7 @@ module.exports = new ApplicationCommand({
                 // ID Twojego arkusza
                 const spreadsheetId = '1Yt5bWu4AE56WVEVZNZSHbE3OU-83XXzqwGSIut1FrHQ';
 
-                // Przygotowujemy dane do zapisania
+                // Przygotowujemy dane do zapisania (bez opcji "obraz")
                 const newData = [[pwc, apwc, iloscFP, kod, uwagi]];
 
                 // Dodajemy wiersz do arkusza
