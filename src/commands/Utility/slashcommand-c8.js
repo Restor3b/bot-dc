@@ -103,7 +103,7 @@ module.exports = new ApplicationCommand({
                 { name: 'APWC', value: `**${apwc}**`, inline: true }
             )
             // Dodajemy pusty field, aby wymusić nowy wiersz
-            .addFields({ name: '\u200B', value: '\u200B', inline: false })
+            .addFields({ name: ' ', value: ' ', inline: false })
             // Drugi rząd: Ilość FP i Kod (inline)
             .addFields(
                 { name: 'Ilość FP', value: `**${iloscFP.toString()}**`, inline: true },
