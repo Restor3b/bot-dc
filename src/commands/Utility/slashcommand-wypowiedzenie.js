@@ -72,9 +72,10 @@ module.exports = new ApplicationCommand({
         }
 
         const embed = new EmbedBuilder()
-            .setAuthor({ name: author.username, iconURL: author.displayAvatarURL() })
+            // Używamy targetMember.displayName, by wyświetlić nick z serwera
+            .setAuthor({ name: targetMember.displayName, iconURL: author.displayAvatarURL() })
             .setTitle('Ktoś złożył wypowiedzenie')
-            .setDescription(`Kto złożył: <@${author.id}>​`)
+            .setDescription(`Kto złożył: <@${author.id}>`)
             .addFields(
                 { name: '**------------------------------------------------------------------**', value: ' ' },
                 { name: 'Funkcjonariusz: ', value: targetMember.displayName, inline: true },
