@@ -94,8 +94,8 @@ module.exports = new ApplicationCommand({
 
         // Budowanie embeda zgodnie z wymaganiami
         const embed = new EmbedBuilder()
-            .setTitle('Nowy wpis do Google Sheets')
-            .setDescription('Szczegóły wpisu:')
+            .setTitle('Nowy C8')
+            .setDescription('Szczegóły:')
             .setColor('#2f3136')
             // Pierwszy rząd: PWC i APWC
             .addFields(
