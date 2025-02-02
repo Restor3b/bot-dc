@@ -42,7 +42,7 @@ module.exports = new ApplicationCommand({
             {
                 name: 'obraz',
                 description: 'Załącz obraz',
-                type: 11, // typ Attachment
+                type: 11, // Attachment
                 required: true
             },
             {
@@ -57,12 +57,11 @@ module.exports = new ApplicationCommand({
         cooldown: 5000
     },
     /**
-     * 
      * @param {DiscordBot} client 
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
-        // Sprawdzenie, czy użytkownik posiada wymaganą rolę
+        // Sprawdzenie uprawnień użytkownika (wymagana rola)
         const requiredRoleId = '1299662554473435186'; 
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
@@ -73,18 +72,18 @@ module.exports = new ApplicationCommand({
             return;
         }
 
-        // Zapobiegamy timeoutowi, odraczamy odpowiedź
+        // Odroczenie odpowiedzi, aby uniknąć timeoutu
         await interaction.deferReply({ ephemeral: true });
 
-        // Pobieramy wartości z interakcji
+        // Pobieranie danych z opcji interakcji
         const pwc = interaction.options.getString('pwc');
         const apwc = interaction.options.getString('apwc');
         const iloscFP = interaction.options.getInteger('iloscfp');
-        const kod = interaction.options.getString('kod'); // wartość wybrana przez użytkownika
-        const obraz = interaction.options.getAttachment('obraz'); // załączony obraz
+        const kod = interaction.options.getString('kod');  // Wybrana wartość jako słowo
+        const obraz = interaction.options.getAttachment('obraz'); // Załączony obraz
         const uwagi = interaction.options.getString('uwagi') || 'Brak';
 
-        // Mapowanie wartości kodu na emoji
+        // Mapowanie wartości kodu na emoji do zapisu w Google Sheets
         const kodMapping = {
             zielony: '🟢',
             pomaranczowy: '🟠',
@@ -93,27 +92,36 @@ module.exports = new ApplicationCommand({
         };
         const emojiKod = kodMapping[kod] || kod;
 
-        // Tworzymy schludnie sformatowany embed
+        // Budowanie embeda zgodnie z wymaganiami
         const embed = new EmbedBuilder()
             .setTitle('Nowy wpis do Google Sheets')
-            .setDescription('Poniżej znajdują się szczegóły wpisu:')
+            .setDescription('Szczegóły wpisu:')
             .setColor('#2f3136')
+            // Pierwszy rząd: PWC i APWC
             .addFields(
                 { name: 'PWC', value: `**${pwc}**`, inline: true },
-                { name: 'APWC', value: `**${apwc}**`, inline: true },
-                { name: 'Ilość FP', value: `**${iloscFP.toString()}**`, inline: true },
-                { name: 'Kod', value: `**${emojiKod}**`, inline: true },
-                { name: 'Uwagi', value: uwagi }
+                { name: 'APWC', value: `**${apwc}**`, inline: true }
             )
-            .setTimestamp()
-            .setFooter({ text: 'Wpis wygenerowany automatycznie', iconURL: client.user.avatarURL() });
+            // Drugi rząd: Ilość FP i Kod (jako słowo)
+            .addFields(
+                { name: 'Ilość FP', value: `**${iloscFP.toString()}**`, inline: true },
+                { name: 'Kod', value: `**${kod}**`, inline: true }
+            )
+            // Trzeci rząd: Uwagi (pełna szerokość)
+            .addFields(
+                { name: 'Uwagi', value: uwagi }
+            );
 
-        // Dodajemy obraz do embed, jeśli został załączony
+        // Dodanie obrazu, jeśli został załączony
         if (obraz && obraz.url) {
             embed.setImage(obraz.url);
         }
 
-        // Pobieramy kanał, na który wysyłamy embed
+        // Dodanie stopki z datą systemową
+        const systemDate = new Date().toLocaleString();
+        embed.setFooter({ text: `Data: ${systemDate}` });
+
+        // Wysyłanie embeda na określony kanał
         const channelId = '1299672680391245846';
         const channel = client.channels.cache.get(channelId);
         if (!channel) {
@@ -122,11 +130,11 @@ module.exports = new ApplicationCommand({
         }
 
         try {
-            // Wysyłamy embed do kanału
+            // Wysłanie embeda do kanału
             await channel.send({ embeds: [embed] });
 
             // ---------------------------------
-            // ZAPIS DO GOOGLE SPREADSHEET (bez obrazka)
+            // ZAPIS DO GOOGLE SPREADSHEET (bez obrazu)
             // ---------------------------------
             try {
                 // Autoryzacja z użyciem pliku JSON
@@ -135,21 +143,19 @@ module.exports = new ApplicationCommand({
                     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
                 });
 
-                // Uzyskujemy klienta
+                // Uzyskanie klienta i obiektu Google Sheets
                 const authClient = await auth.getClient();
                 const googleSheets = google.sheets({ version: 'v4', auth: authClient });
+                const spreadsheetId = '1fjlB6XmGkhzDnHfeyAFSYkRuMCeCzbYKEbvG_IBnRjo';
 
-                // ID arkusza
-                const spreadsheetId = '1Yt5bWu4AE56WVEVZNZSHbE3OU-83XXzqwGSIut1FrHQ';
-
-                // Przygotowujemy dane do zapisania (w kodzie wysyłamy emoji)
+                // Przygotowanie danych do zapisania (kod wysyłany jako emoji)
                 const newData = [[pwc, apwc, iloscFP, emojiKod, uwagi]];
 
-                // Dodajemy wiersz do arkusza
+                // Dodanie wiersza do arkusza
                 await googleSheets.spreadsheets.values.append({
                     auth,
                     spreadsheetId,
-                    range: 'Arkusz1!A:E', // 5 kolumn
+                    range: 'Arkusz1!A:E',
                     valueInputOption: 'RAW',
                     resource: {
                         values: newData,
