@@ -122,7 +122,7 @@ module.exports = new ApplicationCommand({
         embed.setFooter({ text: `Data: ${systemDate}` });
 
         // Pobieramy kanał, na który wysyłamy embed
-        const channelId = '1299672680391245846';
+        const channelId = '1336019633966153799';
         const channel = client.channels.cache.get(channelId);
         if (!channel) {
             await interaction.editReply({ content: 'Nie znaleziono kanału do wysłania wiadomości.' });
