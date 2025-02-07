@@ -156,7 +156,7 @@ module.exports = new ApplicationCommand({
                     .setTitle(`Awans funkcjonariusza`)
                     .setDescription(`Awans został nadany przez <@${author.id}>`)
                     .addFields(
-                        { name: 'Funkcjonariusz:', value: `<@${target.id}>`, inline: true },
+                        { name: 'Funkcjonariusz:', value: targetMember.displayName, inline: true },
                         { name: 'Poprzedni stopień:', value: currentRank ? currentRank : 'Brak', inline: true },
                         { name: 'Nowy stopień:', value: newRank, inline: true },
                         { name: 'Powód:', value: reason, inline: true },
@@ -172,7 +172,7 @@ module.exports = new ApplicationCommand({
                     .setTitle(`Degradacja funkcjonariusza`)
                     .setDescription(`Degradacja została nadana przez <@${author.id}>`)
                     .addFields(
-                        { name: 'Funkcjonariusz:', value: `<@${target.id}>`, inline: true },
+                        { name: 'Funkcjonariusz:', value: targetMember.displayName, inline: true },
                         { name: 'Poprzedni stopień:', value: currentRank ? currentRank : 'Brak', inline: true },
                         { name: 'Nowy stopień:', value: newRank, inline: true },
                         { name: 'Powód:', value: reason, inline: true },
