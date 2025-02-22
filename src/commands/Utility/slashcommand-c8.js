@@ -61,10 +61,10 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
-        // Sprawdzamy, czy użytkownik posiada wymaganą rolę
-        const requiredRoleId = '1328034957117100032'; 
+        // Lista dozwolonych ID ról
+        const allowedRoleIds = ['1328034957117100032', '1340974124306006127'];
         const member = interaction.guild.members.cache.get(interaction.user.id);
-        if (!member.roles.cache.has(requiredRoleId)) {
+        if (!allowedRoleIds.some(roleId => member.roles.cache.has(roleId))) {
             await interaction.reply({
                 content: 'Nie masz uprawnień do użycia tej komendy.',
                 ephemeral: true
@@ -83,7 +83,7 @@ module.exports = new ApplicationCommand({
         const obraz = interaction.options.getAttachment('obraz');
         const uwagi = interaction.options.getString('uwagi') || 'Brak';
 
-        // Mapowanie kodu na emoji do zapisu w arkuszu (używane tylko przy zapisie)
+        // Mapowanie kodu na emoji do zapisu w arkuszu
         const kodMapping = {
             zielony: '🟢',
             pomaranczowy: '🟠',
@@ -121,50 +121,48 @@ module.exports = new ApplicationCommand({
         const systemDate = new Date().toLocaleString();
         embed.setFooter({ text: `Data: ${systemDate}` });
 
-        // Pobieramy kanał, na który wysyłamy embed
-        const channelId = '1336019633966153799';
-        const channel = client.channels.cache.get(channelId);
-        if (!channel) {
-            await interaction.editReply({ content: 'Nie znaleziono kanału do wysłania wiadomości.' });
-            return;
-        }
+        // Lista ID kanałów, do których wysyłamy wiadomość
+        const channelIds = ['1336019633966153799', '1342844967604846592'];
 
-        try {
-            // Wysyłamy embed do kanału
-            await channel.send({ embeds: [embed] });
-
-            // ---------------------------------
-            // ZAPIS DO GOOGLE SPREADSHEET (bez obrazu)
-            // ---------------------------------
+        // Wysyłamy embed do każdego z kanałów
+        for (const channelId of channelIds) {
+            const channel = client.channels.cache.get(channelId);
+            if (!channel) continue;
             try {
-                const auth = new google.auth.GoogleAuth({
-                    keyFile: 'src/bot-dc-449215-43833ac2c28c.json', // Ścieżka do pliku z kluczem serwisowym
-                    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-                });
-                const authClient = await auth.getClient();
-                const googleSheets = google.sheets({ version: 'v4', auth: authClient });
-                // Używamy podanego ID arkusza
-                const spreadsheetId = '1Yt5bWu4AE56WVEVZNZSHbE3OU-83XXzqwGSIut1FrHQ';
-
-                // Przygotowujemy dane do zapisu (dla arkusza używamy emoji dla pola "Kod")
-                const newData = [[pwc, apwc, iloscFP, emojiKod, uwagi]];
-
-                await googleSheets.spreadsheets.values.append({
-                    auth,
-                    spreadsheetId,
-                    range: 'Arkusz1!A:E',
-                    valueInputOption: 'RAW',
-                    resource: { values: newData },
-                });
+                await channel.send({ embeds: [embed] });
             } catch (error) {
-                console.error('Błąd przy zapisie do Google Sheets:', error);
+                console.error(`Błąd przy wysyłaniu wiadomości do kanału ${channelId}:`, error);
             }
-
-            // Odpowiadamy użytkownikowi
-            await interaction.editReply({ content: 'Wpis został wysłany do kanału i zapisany w Google Sheets.' });
-        } catch (err) {
-            console.error(err);
-            await interaction.editReply({ content: 'Wystąpił błąd podczas wysyłania wiadomości.' });
         }
+
+        // ---------------------------------
+        // ZAPIS DO GOOGLE SPREADSHEET (bez obrazu)
+        // ---------------------------------
+        try {
+            const auth = new google.auth.GoogleAuth({
+                keyFile: 'src/bot-dc-449215-43833ac2c28c.json', // Ścieżka do pliku z kluczem serwisowym
+                scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+            });
+            const authClient = await auth.getClient();
+            const googleSheets = google.sheets({ version: 'v4', auth: authClient });
+            // Używamy podanego ID arkusza
+            const spreadsheetId = '1Yt5bWu4AE56WVEVZNZSHbE3OU-83XXzqwGSIut1FrHQ';
+
+            // Przygotowujemy dane do zapisu (dla arkusza używamy emoji dla pola "Kod")
+            const newData = [[pwc, apwc, iloscFP, emojiKod, uwagi]];
+
+            await googleSheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId,
+                range: 'Arkusz1!A:E',
+                valueInputOption: 'RAW',
+                resource: { values: newData },
+            });
+        } catch (error) {
+            console.error('Błąd przy zapisie do Google Sheets:', error);
+        }
+
+        // Odpowiadamy użytkownikowi
+        await interaction.editReply({ content: 'Wpis został wysłany do kanału i zapisany w Google Sheets.' });
     }
 }).toJSON();
