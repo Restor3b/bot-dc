@@ -146,7 +146,7 @@ module.exports = new ApplicationCommand({
             const authClient = await auth.getClient();
             const googleSheets = google.sheets({ version: 'v4', auth: authClient });
             // Używamy podanego ID arkusza
-            const spreadsheetId = '1fjlB6XmGkhzDnHfeyAFSYkRuMCeCzbYKEbvG_IBnRjo';
+            const spreadsheetId = '1Yt5bWu4AE56WVEVZNZSHbE3OU-83XXzqwGSIut1FrHQ';
 
             // Przygotowujemy dane do zapisu (dla arkusza używamy emoji dla pola "Kod")
             const newData = [[pwc, apwc, iloscFP, emojiKod, uwagi]];
