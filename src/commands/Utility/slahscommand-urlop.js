@@ -71,6 +71,9 @@ module.exports = new ApplicationCommand({
         const author = interaction.user;
 
         const vacationRoleId = '1279535711510466601';
+        const channelId = '1259796858654429286';
+        const channel = client.channels.cache.get(channelId);
+
         if (action === 'add') {
             try {
                 await targetMember.roles.add(vacationRoleId);
@@ -89,10 +92,8 @@ module.exports = new ApplicationCommand({
                     .setColor(0x2f3136)
                     .setThumbnail('https://cdn.discordapp.com/attachments/1275544141488717884/1275544141790711949/image.png?ex=677ed88d&is=677d870d&hm=35f546225246cc162b81f0b803a8db9387ee69bcd537035adefd4527bc7546bf&');
 
-                const channelId = '1259796858654429286';
-                const channel = client.channels.cache.get(channelId);
                 if (channel) {
-                    await channel.send({ embeds: [embed] });
+                    await channel.send({ content: `<@${targetMember.id}>`, embeds: [embed] });
                     await interaction.reply({
                         content: `Ranga urlop została dodana dla <@${targetMember.id}> do ${untilDate}.`,
                         ephemeral: true
