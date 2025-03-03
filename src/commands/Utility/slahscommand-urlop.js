@@ -124,29 +124,5 @@ module.exports = new ApplicationCommand({
                 });
             }
         }
-
-        if (action === 'add') {
-            const untilDateTime = new Date(untilDate);
-            const currentTime = new Date();
-            const timeoutDuration = untilDateTime - currentTime;
-
-            if (timeoutDuration > 0) {
-                setTimeout(async () => {
-                    try {
-                        await targetMember.roles.remove(vacationRoleId);
-                        const autoRemoveEmbed = new EmbedBuilder()
-                            .setTitle(`Automatyczne usunięcie rangi urlop`)
-                            .setDescription(`Ranga urlop została automatycznie usunięta użytkownikowi <@${targetMember.id}> po upływie okresu urlopu.`)
-                            .setColor(0x2f3136);
-
-                        if (channel) {
-                            await channel.send({ embeds: [autoRemoveEmbed] });
-                        }
-                    } catch (err) {
-                        console.error('Nie udało się automatycznie usunąć rangi urlop:', err);
-                    }
-                }, timeoutDuration);
-            }
-        }
     }
 }).toJSON();
