@@ -115,7 +115,7 @@ module.exports = new ApplicationCommand({
                 { name: 'Podpis: ', value: `${podpis}`},
                 { name: '**------------------------------------------------------------------**', value: ' '}
             )
-            .setColor(0x2f3136)
+            .setColor(0xffffff)
             .setThumbnail('https://cdn.discordapp.com/attachments/1275544141488717884/1275544141790711949/image.png?ex=677ed88d&is=677d870d&hm=35f546225246cc162b81f0b803a8db9387ee69bcd537035adefd4527bc7546bf&');
 
         // Tutaj podaj ID kanału, do którego wiadomość ma zostać wysłana
