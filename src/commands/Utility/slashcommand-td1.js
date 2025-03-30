@@ -118,7 +118,7 @@ module.exports = new ApplicationCommand({
             .setColor(0xffffff)
             .setThumbnail('https://cdn.discordapp.com/attachments/1275544141488717884/1275544141790711949/image.png?ex=677ed88d&is=677d870d&hm=35f546225246cc162b81f0b803a8db9387ee69bcd537035adefd4527bc7546bf&');
 
-        // Tutaj podaj ID kanału, do którego wiadomość ma zostać wysłana
+        // Kanał, na który wysyłana jest podstawowa informacja o szkoleniu
         const channelId = '1259796858654429292';
         let channel = client.channels.cache.get(channelId);
         if (!channel) {
@@ -129,6 +129,22 @@ module.exports = new ApplicationCommand({
         try {
             await channel.send(`<@${osobaSzkolona.id}>`);
             await channel.send({ embeds: [embed] });
+
+            // Jeśli egzamin typu Deputy i osoba zdała z ponad 189 punktami, wysyłamy dodatkowy embed z informacją o awansie
+            if (rodzajSzkolenia === 'Deputy egzamin' && wynikEgzaminu === 'zdany' && liczbaPunktow > 189) {
+                const promotionEmbed = new EmbedBuilder()
+                    .setTitle('Awans')
+                    .setDescription(`Należy wystawić awans dla <@${osobaSzkolona.id}>.`)
+                    .setColor(0x00ff00)
+                    .setTimestamp();
+
+                const promotionChannelId = '1337496566004715610';
+                const promotionChannel = client.channels.cache.get(promotionChannelId);
+                if (promotionChannel) {
+                    await promotionChannel.send({ embeds: [promotionEmbed] });
+                }
+            }
+
             await interaction.editReply({ content: 'Informacja o szkoleniu została wysłana.' });
         } catch (err) {
             console.error(err);
