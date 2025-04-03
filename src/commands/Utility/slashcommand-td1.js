@@ -130,8 +130,8 @@ module.exports = new ApplicationCommand({
             await channel.send(`<@${osobaSzkolona.id}>`);
             await channel.send({ embeds: [embed] });
 
-            // Jeśli egzamin typu Deputy i osoba zdała z ponad 189 punktami, wysyłamy dodatkowy embed z informacją o awansie
-            if (rodzajSzkolenia === 'Deputy egzamin' && wynikEgzaminu === 'zdany' && liczbaPunktow > 189) {
+            
+            if (rodzajSzkolenia === 'Deputy egzamin' && wynikEgzaminu === 'zdany' && liczbaPunktow >= 183) {
                 const promotionEmbed = new EmbedBuilder()
                     .setTitle('Awans')
                     .setDescription(`Należy wystawić awans dla <@${osobaSzkolona.id}>.`)
