@@ -97,7 +97,7 @@ module.exports = new ApplicationCommand({
                 await interaction.editReply({ content: 'Musisz podać liczbę punktów dla egzaminu Deputy.' });
                 return;
             }
-            wynikOpis = `zdany ${liczbaPunktow}/229`;
+            wynikOpis = `zdany ${liczbaPunktow}/296`;
         }
 
         const podpis = interaction.member.nickname || szkoleniowiec.username;
@@ -131,7 +131,7 @@ module.exports = new ApplicationCommand({
             await channel.send({ embeds: [embed] });
 
             
-            if (rodzajSzkolenia === 'Deputy egzamin' && wynikEgzaminu === 'zdany' && liczbaPunktow >= 183) {
+            if (rodzajSzkolenia === 'Deputy egzamin' && wynikEgzaminu === 'zdany' && liczbaPunktow >= 236) {
                 const promotionEmbed = new EmbedBuilder()
                     .setTitle('Awans')
                     .setDescription(`Należy wystawić awans dla <@${osobaSzkolona.id}>.`)
