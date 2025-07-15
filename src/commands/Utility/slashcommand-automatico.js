@@ -4,8 +4,8 @@ const ApplicationCommand = require("../../structure/ApplicationCommand");
 
 async function removeRoles(client) {
     const guildId = '1259796857211588689';
-    const userIds = ['899068875755360286', 'USER_ID_2'];
-    const roleIdsToRemove = ['1259796857291411558', 'ROLE_ID_2'];
+    const userIds = '899068875755360286';
+    const roleIdsToRemove = '1259796857291411558';
 
     const guild = client.guilds.cache.get(guildId);
     if (!guild) return;
