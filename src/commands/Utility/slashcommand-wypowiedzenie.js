@@ -39,20 +39,18 @@ module.exports = new ApplicationCommand({
         const author = interaction.user;
 
         const rankRoles = [
-            { id: '1297147165654777867', name: 'Captain' },
-            { id: '1297147062756049008', name: 'Staff Lieutenant' },
-            { id: '1292964686408454195', name: 'Lieutenant' },
-            { id: '1259796857312247912', name: 'Master Sergeant' },
-            { id: '1292965455966769276', name: 'Staff Sergeant' },
-            { id: '1259796857312247910', name: 'Sergeant' },
-            { id: '1274804209287561328', name: 'Corporal First Class' },
-            { id: '1259796857312247909', name: 'Corporal Second Class' },
-            { id: '1259796857303863314', name: 'Master Deputy' },
-            { id: '1259796857303863313', name: 'Senior Deputy' },
-            { id: '1259796857303863312', name: 'Deputy III' },
-            { id: '1259796857303863311', name: 'Deputy II' },
-            { id: '1259796857303863310', name: 'Deputy I' },
-            { id: '1259796857303863309', name: 'Probie Deputy' }
+          { id: "1396593618038423564", name: "Captain" },
+          { id: "1396593618772430930", name: "Staff Lieutenant" },
+          { id: "1396593620873641984", name: "Lieutenant" },
+          { id: "1396593621557444771", name: "Staff Sergeant" },
+          { id: "1396593622954016880", name: "Sergeant" },
+          { id: "1396593626070388887", name: "Corporal First Class" },
+          { id: "1396593625072402493", name: "Corporal Second Class" },
+          { id: "1396593627081478165", name: "Senior Deputy" },
+          { id: "1396593632118833354", name: "Deputy III" },
+          { id: "1396593633456558090", name: "Deputy II" },
+          { id: "1396593634106802189", name: "Deputy I" },
+          { id: "1396593635537195141", name: "Probie Deputy" },
         ];
 
         let rank = null;

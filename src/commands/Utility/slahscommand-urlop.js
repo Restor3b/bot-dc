@@ -53,7 +53,7 @@ module.exports = new ApplicationCommand({
      * @param {ChatInputCommandInteraction} interaction 
      */
     run: async (client, interaction) => {
-        const requiredRoleId = '1259796857291411558';
+        const requiredRoleId = '1396593652733575320';
         const member = interaction.guild.members.cache.get(interaction.user.id);
         if (!member.roles.cache.has(requiredRoleId)) {
             await interaction.reply({
@@ -70,7 +70,7 @@ module.exports = new ApplicationCommand({
         const untilDate = interaction.options.getString('do_kiedy');
         const author = interaction.user;
 
-        const vacationRoleId = '1279535711510466601';
+        const vacationRoleId = '1396593616511832247';
         const channelId = '1259796858654429286';
         const channel = client.channels.cache.get(channelId);
 

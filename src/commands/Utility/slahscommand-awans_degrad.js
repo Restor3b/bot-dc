@@ -88,18 +88,18 @@ module.exports = new ApplicationCommand({
 
       
         const rankRoles = {
-            'Captain': '1297147165654777867',
-            'Staff Lieutenant': '1297147062756049008',
-            'Lieutenant': '1292964686408454195',
-            'Staff Sergeant': '1292965455966769276',
-            'Sergeant': '1259796857312247910',
-            'Corporal Second Class': '1259796857312247909',
-            'Corporal First Class': '1274804209287561328',
-            'Senior Deputy': '1259796857303863313',
-            'Deputy III': '1259796857303863312',
-            'Deputy II': '1259796857303863311',
-            'Deputy I': '1259796857303863310',
-            'Probie Deputy': '1259796857303863309'
+            'Captain': '1396593618038423564',
+            'Staff Lieutenant': '1396593618772430930',
+            'Lieutenant': '1396593620873641984',
+            'Staff Sergeant': '1396593621557444771',
+            'Sergeant': '1396593622954016880',
+            'Corporal Second Class': '1396593625072402493',
+            'Corporal First Class': '1396593626070388887',
+            'Senior Deputy': '1396593627081478165',
+            'Deputy III': '1396593632118833354',
+            'Deputy II': '1396593633456558090',
+            'Deputy I': '1396593634106802189',
+            'Probie Deputy': '1396593635537195141'
         };
 
         const newRankId = rankRoles[newRank];
