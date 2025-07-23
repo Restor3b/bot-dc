@@ -9,7 +9,7 @@ module.exports = new ApplicationCommand({
         type: 1,
         options: [
             {
-                name: 'Kogo',
+                name: 'kogo',
                 description: 'Kogo chcesz zatrudnić',
                 type: 6, // USER
                 required: true
