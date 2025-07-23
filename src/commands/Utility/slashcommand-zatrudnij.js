@@ -36,7 +36,7 @@ module.exports = new ApplicationCommand({
             return;
         }
 
-        const targetUser = interaction.options.getUser('uzytkownik');
+        const targetUser = interaction.options.getUser('kogo');
         const targetMember = interaction.guild.members.cache.get(targetUser.id);
         const author = interaction.user;
 
