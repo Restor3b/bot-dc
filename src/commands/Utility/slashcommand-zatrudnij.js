@@ -46,24 +46,30 @@ module.exports = new ApplicationCommand({
             '1396593652733575320'
         ];
 
-        const checkRoleId = '1396593714218012824'; // sprawdzana rola
-        const intermediateRoleId = '1396593715166052433'; // rola pośrednia
+        const specialRoleId = '1396593714218012824';
+        const intermediateRoleId = '1396593715166052433';
 
         const channelId = '1397689520970793080';
         const channel = client.channels.cache.get(channelId);
 
         try {
-            if (targetMember.roles.cache.has(checkRoleId)) {
-                // Jeśli ma specjalną rangę
-                if (!targetMember.roles.cache.has(intermediateRoleId)) {
-                    await targetMember.roles.add(intermediateRoleId);
-                } else {
-                    for (const roleId of roleIdsToAssign) {
-                        await targetMember.roles.add(roleId);
-                    }
+            if (targetMember.roles.cache.has(specialRoleId)) {
+                await targetMember.roles.remove(specialRoleId);
+                await targetMember.roles.add(intermediateRoleId);
+
+                await interaction.reply({
+                    content: `Zmieniono rangę <@${targetUser.id}> na pośrednią.`,
+                    ephemeral: true
+                });
+                return; // Zakończ tutaj – bez embeda
+            }
+
+            if (targetMember.roles.cache.has(intermediateRoleId)) {
+                await targetMember.roles.remove(intermediateRoleId);
+                for (const roleId of roleIdsToAssign) {
+                    await targetMember.roles.add(roleId);
                 }
             } else {
-                // Jeśli nie ma tej specjalnej rangi, nadaj domyślne trzy
                 for (const roleId of roleIdsToAssign) {
                     await targetMember.roles.add(roleId);
                 }
