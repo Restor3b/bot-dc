@@ -1,4 +1,4 @@
-const { ChatInputCommandInteraction, EmbedBuilder} = require("discord.js");
+const { ChatInputCommandInteraction, EmbedBuilder } = require("discord.js");
 const DiscordBot = require("../../client/DiscordBot");
 const ApplicationCommand = require("../../structure/ApplicationCommand");
 
@@ -46,12 +46,27 @@ module.exports = new ApplicationCommand({
             '1396593652733575320'
         ];
 
+        const checkRoleId = '1396593714218012824'; // sprawdzana rola
+        const intermediateRoleId = '1396593715166052433'; // rola pośrednia
+
         const channelId = '1397689520970793080';
         const channel = client.channels.cache.get(channelId);
 
         try {
-            for (const roleId of roleIdsToAssign) {
-                await targetMember.roles.add(roleId);
+            if (targetMember.roles.cache.has(checkRoleId)) {
+                // Jeśli ma specjalną rangę
+                if (!targetMember.roles.cache.has(intermediateRoleId)) {
+                    await targetMember.roles.add(intermediateRoleId);
+                } else {
+                    for (const roleId of roleIdsToAssign) {
+                        await targetMember.roles.add(roleId);
+                    }
+                }
+            } else {
+                // Jeśli nie ma tej specjalnej rangi, nadaj domyślne trzy
+                for (const roleId of roleIdsToAssign) {
+                    await targetMember.roles.add(roleId);
+                }
             }
 
             const embed = new EmbedBuilder()
@@ -70,7 +85,7 @@ module.exports = new ApplicationCommand({
             }
 
             await interaction.reply({
-                content: `Pomyślnie zatrudniono <@${targetUser.id}> i nadano rangi.`,
+                content: `Pomyślnie zatrudniono <@${targetUser.id}> i nadano odpowiednie rangi.`,
                 ephemeral: true
             });
 
